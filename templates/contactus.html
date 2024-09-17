@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Rice Leaf Disease Segmentation</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --text-color: #333;
+            --background-color: white;
+            --hover-color: #388E3C;
+            --light-gray: #f7f7f7;
+            --border-color: #ddd;
+            --button-color: #4CAF50;
+            --button-hover-color: #45a049;
+            --input-background: #f9f9f9;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-color);
+            margin: 0;
+            background-color: var(--light-gray);
+            padding-top: 70px; /* Adjust based on header height */
+            box-sizing: border-box;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--background-color);
+            position: fixed;
+            width: 95%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+         .nav {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--hover-color);
+        }
+
+        .contact-form-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 70px); /* Adjust based on header height */
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .intro-text {
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .contact-form {
+            width: 100%;
+            max-width: 600px; /* Maximum width of the form */
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px; /* Slightly rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
+
+        .contact-form h2 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px; /* Reduced padding for a simpler look */
+            border: 1px solid var(--border-color); /* Simple border */
+            border-radius: 4px; /* Slightly rounded corners */
+            font-size: 1rem;
+            background-color: var(--input-background);
+            box-sizing: border-box;
+            margin-bottom: 15px; /* Spacing between elements */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #black; /* Light gray placeholder */
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.2); /* Subtle shadow on focus */
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            background-color: var(--button-color);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--button-hover-color);
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: #f1f1f1;
+            margin-top: 40px;
+        }
+
+    </style>
+	<script>
+		function submitForm(event) {
+		    event.preventDefault(); // Prevent the default form submission
+
+		    const formData = new FormData(document.querySelector('.contact-form'));
+
+		    fetch("{{ url_for('contactus') }}", {
+		        method: 'POST',
+		        body: formData,
+		    })
+		    .then(response => response.json())
+		    .then(data => {
+		        if (data.success) {
+		            alert("Thank you for your message!");
+		            document.querySelector('.contact-form').reset(); // Reset the form fields
+		        } else {
+		            alert("There was an error submitting your message. Please try again.");
+		        }
+		    })
+		    .catch(error => {
+		        console.error('Error:', error);
+		        alert("There was an error submitting your message. Please try again.");
+		    });
+		}
+	</script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">PaddyWatch</div>
+        <div class="nav">
+            <a href="{{ url_for('index') }}">ပင်မစာမျက်နှာ</a>
+            <a href="{{ url_for('upload_file') }}">စပါးရွက်ရောဂါရှာဖွေရန်</a>
+            <a href="{{ url_for('about') }}">ကျွန်ုပ်တို့အကြောင်း</a>
+            <a href="{{ url_for('contactus') }}">ဆက်သွယ်ရန်</a>
+        </div>
+    </div>
+
+<div class="contact-form-container">
+        <div class="intro-text">
+            <p>သင်၏ အကြောင်းပြန်စာများကို ကျွန်ုပ်တို့ သေချာစွာ မျှော်လင့်ပါသည်။ မေးခွန်းများ သို့မဟုတ် မှတ်ချက်များရှိပါက အောက်ပါ ပုံစံကို အသုံးပြု၍ ဆက်သွယ်ပါ။</p>
+        </div>
+        <form class="contact-form" onsubmit="submitForm(event)">
+            <h2>ဆက်သွယ်ရန်</h2>
+
+            <input type="text" id="name" name="name" placeholder="အမည်" required aria-label="Your Full Name">
+
+            <input type="email" id="email" name="email" placeholder="အီးမေးလ်" required aria-label="Your Email Address">
+
+            <textarea id="message" name="message" placeholder="မှတ်ချက်" required aria-label="Your Message"></textarea>
+
+            <button type="submit">စာပို့ပါ</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>Copyright © | All Rights Reserved</p>
+    </div>
+</body>
+
+</html>
+

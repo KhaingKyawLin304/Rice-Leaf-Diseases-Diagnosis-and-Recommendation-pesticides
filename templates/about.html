@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Rice Leaf Disease Segmentation</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --text-color: #333;
+            --background-color: white;
+            --hover-color: #388E3C;
+            --light-gray: #f7f7f7;
+        }
+
+        /* Global styles */
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-color);
+            margin: 0;
+            background-color: var(--light-gray);
+            padding-top: 70px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid #ddd;
+            background-color: var(--background-color);
+            position: fixed;
+            width: 95%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Logo styles */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        /* Navigation styles */
+        .nav {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--hover-color);
+        }
+
+        /* Content styles */
+        .about-section {
+            padding: 40px 20px;
+        }
+
+        .about-section h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: -30px;
+            color: var(--primary-color);
+        }
+
+        .about-section p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            line-height: 1.7;
+            background-color: var(--light-gray);
+            padding: 15px 20px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .about-section .team {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .about-section .team-member {
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .about-section .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-section .team-member h3 {
+            margin-top: 10px;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .about-section .team-member p {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        /* Footer styles */
+        .footer {
+            text-align: center;
+            color: #666;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background-color: #f1f1f1;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">PaddyWatch</div>
+        <div class="nav">
+            <a href="{{ url_for('index') }}">ပင်မစာမျက်နှာ</a>
+            <a href="{{ url_for('upload_file') }}">စပါးရွက်ရောဂါရှာဖွေရန်</a>
+            <a href="{{ url_for('about') }}">ကျွန်ုပ်တို့အကြောင်း</a>
+            <a href="{{ url_for('contactus') }}">ဆက်သွယ်ရန်</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="about-section">
+            <h1>ကျွန်ုပ်တို့အကြောင်း</h1>
+            <p>PaddyWatch မှ ကြိုဆိုပါသည်။ ကျွန်ုပ်တို့သည် နည်းပညာ၏ အားကို အသုံးပြု၍ သီးနှံများကို ကာကွယ်ရန်နှင့် ကျန်းမာသော၊ တာဝန်ရှိသော အနာဂတ်ကို အာမခံရန် ရည်မှန်းပါသည်။ ကျွန်ုပ်တို့၏ အဖွဲ့သည် ဆန်အရွက်ရောဂါများကို ရှာဖွေရန်နှင့် စီမံခန့်ခွဲရန် အထူးသဖြင့် နည်းပညာဖြင့် ဖြေရှင်းနည်းများ တီထွင်ရာတွင် အလေးထားပါသည်။ လယ်သမားများ၏ သီးနှံအရေအတွက်နှင့် အသက်မွေးဝမ်းကြောင်းကို ကာကွယ်ရန် ကူညီပါသည်။</p>
+            <p>လယ်ယာလုပ်ငန်းတွင် အတွေ့အကြုံနှင့် စက်မှုသိပ္ပံကျွမ်းကျင်မှုအသစ်များဖြင့် ကျွန်ုပ်တို့သည် ရောဂါရှာဖွေရေးကို ပိုမိုလွယ်ကူပြီး ထိရောက်သော နည်းလမ်းများဖြင့် အသုံးပြုနိုင်သော ကိရိယာများ ပံ့ပိုးပေးရန် အာမခံပါသည်။ ကျွန်ုပ်တို့၏ ရည်မှန်းချက်မှာ လယ်သမားများအား အပြောင်းအလဲများနှင့် ရင်ဆိုင်ရသော ပတ်ဝန်းကျင်အတွင်း သင့်လျော်စွာ ရပ်တည်နိုင်ရန် လိုအပ်သော အသိပညာနှင့် ကိရိယာများကို ပံ့ပိုးပေးခြင်းဖြစ်ပါသည်။</p>
+            <h2 style="font-size: 1.5rem; color: var(--text-color); margin-bottom: 20px;">အဖွဲဝင်များ</h2>
+            <div class="team">
+                <div class="team-member">
+                    <h3>Phoe Hla Pyit</h3>
+                    <p>Chief Agronomist</p>
+                </div>
+                <div class="team-member">
+                    <h3>Khaing Kyaw Lin</h3>
+                    <p>ML Engineer</p>
+                </div>
+                <div class="team-member">
+                    <h3>Htoo Aung Lwin</h3>
+                    <p>Product Manager</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="footer">
+        <p>Copyright © | All Rights Reserved</p>
+    </div>
+</body>
+
+</html>
+
