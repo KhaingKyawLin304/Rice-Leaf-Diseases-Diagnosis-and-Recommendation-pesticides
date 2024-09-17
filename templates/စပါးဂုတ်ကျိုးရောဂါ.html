@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Blast | Rice Leaf Disease Segmentation</title>
+    <link href="{{ url_for('static', filename='style2.css') }}" rel="stylesheet" type="text/css" />
+
+
+     <style>
+        /* Root variables for color scheme */
+        :root {
+            --primary-color: #4CAF50;
+            --text-color: #333;
+            --background-color: white;
+            --hover-color: #388E3C;
+        }
+
+        /* Global styles */
+        body {
+            font-family: 'Georgia', serif;
+            padding-top: 70px; /* Adjust this value based on the header height */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px; /* Increased padding for a bigger header */
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: var(--background-color);
+            position: fixed; /* Fix the header position */
+            width: 95%; /* Make sure header spans the full width */
+            top: 0; /* Stick to the top of the page */
+            left: 0; /* Align to the left edge */
+            z-index: 1000; /* Ensure the header stays on top of other content */
+        }
+
+        /* Logo styles */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        /* Navigation styles */
+        .nav {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--hover-color);
+        }
+
+        /* Footer styles */
+        .footer {
+            text-align: center;
+            color: #666;
+            padding: 10px;
+            border-top: 1px solid #ddd; /* Top border to separate from content */
+            background-color: #f1f1f1; /* Light background color for footer */
+            margin-top: 20px; /* Space above the footer */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+    <div class="header">
+        <div class="logo">PaddyWatch</div>
+        <div class="nav">
+            <a href="{{ url_for('index') }}">ပင်မစာမျက်နှာ</a>
+            <a href="{{ url_for('upload_file') }}">စပါးရွက်ရောဂါရှာဖွေရန်</a>
+            <a href="{{ url_for('about') }}">ကျွန်ုပ်တို့အကြောင်း</a>
+            <a href="{{ url_for('contactus') }}">ဆက်သွယ်ရန်</a>
+        </div>
+    </div>
+        <div class="content">
+            <table width="1100" height="824" border="0" class="botanyfont">
+                <tr>
+                    <td width="191" height="" valign="top" class=" botany1">
+                        <table width="191" border="0" align="center">
+                            <tr class="menubg">
+                                <td class="rounded-menu" width="197" height="56" align="center" valign="middle"><b><strong> <a href="#symptom">ရောဂါလက္ခဏာများ </a></strong></td>
+                            </tr>
+                            <tr class="menubg">
+                                <td class="rounded-menu" height="58" align="center" valign="middle"><strong><a href="#Identification">ရောဂါပိုးမွှား ခွဲခြားသတ်မှတ်ခြင်း</a></strong></td>
+                            </tr>
+                            <tr class="menubg">
+                                <td class="rounded-menu" height="58" align="center" valign="middle"><strong><a href="#Mgmt">&nbsp;&nbsp;&nbsp;စီမံခန့်ခွဲမှုနည်းလမ်းများ</a></strong></td>
+                            </tr>
+                        </table> <br />
+                    <td width="803" colspan="2" valign="top" bgcolor="#fffff0" class="croppro">
+                        <h1 align="center" size="2"><strong>စပါးဂုတ်ကျိုးရောဂါ(Blast)</strong><br /> (
+                            <em>Pyricularia oryzae</em>) <br />
+                        </h1>
+                        <br />
+                        <table width="750" border="0" align="center">
+                            <tr>
+                                <td width="590" bgcolor="#92b223"><b><font color="#ffff1f" size="4"> <a name="symptom" id="symptom"></a>ရောဂါလက္ခဏာများ </font></b></td>
+                                <td width="150" colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td colspan="2" align="center" valign="middle"> </td>
+                            </tr>
+
+                            <tr>
+                                <td rowspan="4">
+                                    <ul class="botanybullet">
+					<li>စပါးပင်၏ မြေပြင်အထက်ရှိ အစိတ်အပိုင်းများအားလုံး (စပါးရွက်များ၊ စပါးရွက်ခေါင်း၊ စပါးနှင့် စပါးဆွဲခေါင်း၊ လည်ပင်းနှင့် စပါးခေါင်း) သည် မှိုဖြင့် ဝင်ရောက်ခံစားခံရသည်။</li>
+					<li>အစောပိုင်း လက္ခဏာများမှာ အဖြူရောင်မှ မီးခိုးစိမ်းရောင် အတောက်အပြောက်အတွင်းရှိ အညိုရောင် နယ်နိမိတ်များဖြစ်သည်။</li>
+					<li>စပါးရွက်ပေါ်တွင် အမည်းရောင် သဲထိပ်ကဲ့သို့သော အစက်အပြောက်များ ပေါ်လာပြီး ခန့်မှန်းခြေအားဖြင့် 0.5 မှ 1.5 စင်တီမီတာ အရှည်၊ 0.3 မှ 0.5 စင်တီမီတာ အကျယ်ရှိသော အဝါရောင် စက်များဖြစ်လာသည်။</li>
+					<li>အကြီးဆုံးသော စက်များသည် အပြာရောင်မှ မီးခိုးရောင်များဖြင့် တစိတ်တပိုင်းပျက်စီး၍ အချင်းပြတ်နေသော စက်များ ဖြစ်လာပြီး ထင်းရွက်များပေါ်တွင် မဟုတ်သော ထင်ရှားသော အစက်အပြောက်ကြီးများ ဖြစ်လာသည်။</li>
+					<li>ဆွဲခေါင်းနာတာကို ထိမှန်ခြင်းက လည်တန်းတွင် ဖောက်ဖျက်ခြင်းကို ဖြစ်စေပြီး စပါးခေါင်းကျိုးကျပေစေသည်။</li>
+					<li>အသားအတွင်းပိုင်းတွင် အနာအဖျားများရှိသည်။</li>
+					<li>စပါးပင်ရောဂါကင်ကတိဖြစ်သော ရေဉပါးများကဲ့သို့သော စပါးခေါင်းအဖြူရောင်ကို ဖြစ်စေသည်။</li>
+					<li>လည်ပင်းပေါ်ရှိ အနာများသည် မီးခိုးညိုရောင်ဖြစ်ပြီး လည်ပင်းကြိုးကြိုးလုံးအဖြစ် စပါးခေါင်းကျိုးကျပေစေသည်။</li>
+					<li>ရေချိုင့်စဉ်ကာလမတိုင်မီ လည်ပင်းတွင် ရောဂါကူးစက်ပါက အစေ့အဆန် မထွက်လာပေ၊ ရောဂါကူးစက်ပြီးနောက် အစေ့များသည် အရည်အသွေးမကောင်းသည့် အစေ့များ ဖြစ်လာသည်။</li>
+					<li>စပါးခေါင်း၏ အခွေများပေါ်တွင်နှင့် ရိုးပါးတစ်ထောင်ပေါ်ရှိ အနာများသည် အညိုမှ အနက်ရောင်အထိ ဖြစ်လာသည်။</li>
+					<li>စပါးမျိုးစိတ်အမျိုးမျိုးတွင် အစက်အပြောက်၏ အရွယ်အစားနှင့် ပုံသဏ္ဍာန်မှာ ကွဲပြားခြားနားသည်။</li>
+                                    </ul>
+                                </td>
+                                <td height="150" align="center" valign="middle"><a href="cultivationpractices3.html"></a><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/symptoms/1-lesions  on leaves with grey centre and brown margin.JPG') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top"><span class="labelline">Lesions  on leaves with grey centre and brown margin</span></td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td height="184" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/symptoms/2-sphindle shaped lesions on leaves.jpg') }}" width="150" height="150" align="top" /><span class="labelline">Spindle shaped lesions on leaves</span></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" align="left" valign="top">
+                                    <p><strong>အရွက်ကြီးပျက်ခြင်း</strong></p>
+                                    <ul class="botanybullet">
+					<li>အထီးကျန်တစ်ခုတွင် ရောဂါဖြစ်သော အထူးသဖြင့် စပါးပင်အထည်အပေါ်တွင် မီးလောင်သွားသော အခြေအနေကို ဖြစ်စေသည် - ထို့ကြောင့် "BLAST" အမည်ကို သုံးပါသည်။</li>
+					<li>အထူးသဖြင့် စပါးပင်ကျရောက်မှု (ဖတ်သို့ထွက်သည့်အခါတွင်) ဖြစ်တတ်သည်။</li>
+                                    </ul>
+                                    <p><strong><br />
+                လည်ပင်းကြီးပျက်ခြင်း</strong></p>
+                                    <ul class="botanybullet">
+                                        <li>
+                                            <p>စပါးခေါင်း၏ လည်ပင်းဧရိယာမှာ အပြာရောင်ပြောင်းသွားပြီး အပြုံးအပြီး / အစိတ်အပိုင်းအပြုံးမရှိပါ - အစေ့များ မထွက်နိုင်ပါ၊ စပါးခေါင်းသည် လည်ပင်းတွင် ကျွတ်လျက် သီကြုံရှိသည်။</p>
+                                        </li>
+                                    </ul>
+                                    <p><strong><br />
+                ခေါင်းဆီကြီးပျက်ခြင်း</strong></p>
+                                    <ul class="botanybullet">
+                                        <li>ခေါင်းဆီများသည် အနက်ရောင်ဖြစ်ပြီး ဖောက်ထွက်လျက်ရှိသည်။<strong>&nbsp;</strong></li>
+                                    </ul>
+                                </td>
+                                <td align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/symptoms/3-NECK BLAST.JPG') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="middle"><span class="labelline">Neck Blast</span></td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/symptoms/4-nodal Blast.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="middle"><span class="labelline">Nodal Blast</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right" valign="middle">
+                                    <a href="{{ url_for('blast') }}">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table width="750" border="0" align="center">
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td width="546" bgcolor="#92B223"><b><font color="#ffff1f" size="4"><strong><a name="Identification" id="Identification"></a>ရောဂါပိုးမွှား ခွဲခြားသတ်မှတ်ခြင်း</strong></font></b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td align="center" valign="middle"></td>
+                            </tr>
+                            <tr>
+                                <td width="152" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/identification of pathogen/colony of pyricularia oryzae.jpg') }}" width="150" height="150" /></td>
+                                <td width="38"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/identification of pathogen/conidia.jpg') }}" width="150" height="150" /></td>
+                                <td rowspan="5" align="left" valign="top">
+                                    <ul class="botanybullet">
+					<li>ဤရောဂါသည် Pyricularia orizae ဟု အမည်ရသော မှိုဖြင့် ဖြစ်သည်။ ယင်းမှိုသည် စပါးမျိုးစေ့များနှင့် ရောဂါခံစားထားသော စပါးခေါင်းများတွင် အစေ့အမြစ်တွင် အပူပိုင်းတွင် ရှိနေပါသည်။</li>
+					<li>မှို၏ အများဆုံးထွက်သော အဆင့်များ၊ အပေါင်းများကို ယင်းနှစ်ရက်မှစ၍ စပါးပင်များသို့ ပျံ့နှံ့သွားပြီး အခြားသော ရောဂါများကို ဖန်တီးနိုင်သည်။</li>
+					<li>ယင်းအသစ်တက်သော ရောဂါများမှ အပေါင်းများသည် လေဖြင့် အခြားစပါးပင်များသို့ ကွာဝေးစွာ ပျံ့နှံ့နိုင်သည်။</li>
+					<li>ရောဂါရှိသော conidiophores များသည် အစိတ်အပိုင်းတစ်ခုစီမှ အစုအဖွဲ့များတွင် ထွက်ရှိသည်။ ၎င်းတို့သည် တစ်ယောက်တည်းဖြင့် ၂-၄ ခုရှိနိုင်သော်လည်း မရှိပါ။ Conidiophores ၏ အခြေပြုနေရာသည် အပြားဖွင့်ခြင်းမရှိပေ၊ အလင်းအပိပ်သို့ ဖျက်လိုက်ပါသည်။</li>
+					<li>မှို၏ conidia များသည် ၂၀-၂၂ x ၁၀-၁၂ µm အရွယ်အစားရှိသည်။ Conidia များသည် ၂-ဝပ်ကွဲ၊ ပတ်လုံးမှ အနည်းငယ်ပြင်ဆင်ထားပြီး အခြေရှိရာတွင် သက်သာသော အရွယ်အစားရှိသည်။ ၎င်းတို့သည် obclavate နှင့် အထိအပေါ်သို့ အချိုးမှန်ထားပါသည်။ အခြေတွင် မျက်နှာကျက်သော သို့မဟုတ် အတိုင်းအတာများနှင့် အချိုးအစားဖြင့် အနည်းငယ် ရှည်လျားသော သွားများ ဖြစ်သည်။</li>
+					<li>ပြီးပြည့်စုံသော အဆင့် ကို သေချာစွာ ရှာဖွေတွေ့ရှိရမှု လျော့နည်းသည့် အခြေအနေတွင် ရှိပါသည်။ </li>               
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="middle"><span class="labelline">Colony of Pyricularia Oryzae</span></td>
+                                <td align="center" valign="top"><span class="labelline">Conidia</span></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/identification of pathogen/Conidia  are pyriform (pear-like) in shape..jpg') }}" width="150" height="150" /></td>
+                                <td align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/identification of pathogen/pyricularia oryzae microscopic.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td height="52" align="center" valign="top"><span class="style11">Conidia  are pyriform<br />
+              (pear-like) in shape.</span></td>
+                                <td align="center" valign="top"><span class="style11">pyricularia oryzae microscopic</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <p><strong><br />
+                ရောဂါသင့်လျော်သော အခြေအနေများ:</strong></p>
+                                    <ul class="botanybullet">
+					<p>ဤရောဂါသည် တစ်နှစ်တာအတွင်း လေထဲတွင် အပေါင်းများရှိနေခြင်းမှ အထောက်အပံ့ရသည်၊ အထူးသဖြင့် ရာသီဥတုမှ အမြင့်ဆုံးနေရာများတွင် ဖြစ်ပေါ်သည်။ သင့်လျော်သော အခြေအနေများတွင် မိုးလုံးလုံးကြီး၊ မိုးရွာမှုများနှင့် မိုးထွေးမှုများပါဝင်ပြီး အံမိုနီယမ် ဆပ်ဖိတ်ကဲ့သို့သော အဆီထွက်ကြေးမှုများနှင့် မြင့်မားသော အပေါင်းမရှိမှု (၉၀% သို့မဟုတ် ပိုများ) နှင့် နွယ်ရေများလည်း ရောဂါ ဖွံ့ဖြိုးတိုးတက်မှုကို အထောက်အပံ့ဖြစ်စေသည်။ အပူချိန် ၂၅-၂၈°C အတွင်းဖြစ်သော အခြေအနေများလည်း ရောဂါကို ဖွံ့ဖြိုးစေသည်။</p>
+                                    </ul>
+                                    <br />
+                                    <p><strong>ဖြစ်ပေါ်မှု:</strong></p>
+                                    <ul class="botanybullet">
+					<p>စပါးကြီးပျက်ခြင်း သည် အရိုးဆုံး စိုက်ပျိုးရေးရောဂါများထဲမှ တစ်ခုဖြစ်ပြီး အနက်ရောင်လည်ပင်း သို့မဟုတ် စပါးအပင်မီးဖျက်မှူးဟုလည်း အမည်ရသည်။ ကမ္ဘာ့စပါးစိုက်ပျိုးရေးနိုင်ငံ ၈၀ နိုင်ငံတွင် အစီရင်ခံစာတင်ခဲ့ပြီး မြန်မာနိုင်ငံတွင် ၁၉၇၂ တွင် ပထမဆုံး မှတ်တမ်းတင်ခဲ့သည်။ ရောဂါသည် စပါးထွက်အဆီ ၇၀% မှ ၈၀% အထိ အဆုံးသတ်မှုကို ဖြစ်စေသော အန္တရာယ်ရှိသည်။</p>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">
+                                    <a href="{{ url_for('blast') }}">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table width="750" border="0" align="center">
+                            <tr>
+                                <td width="436" bgcolor="#92b223"><b><font color="#ffff1f" size="4"><a name="Mgmt" id="Mgmt"></a>စီမံခန့်ခွဲမှုနည်းလမ်းများ</font></b></td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="2" align="center" valign="middle"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" valign="top"><strong>ရိုးရာနည်းလမ်းများ</strong>
+                                    <ul class="botanybullet">
+                                        <li>စပါးကြီးပျက်ခြင်းကို အထိကန့်သတ်ရန် တိုက်ဖျက်မှုအတွက် တုံ့ပြန်နိုင်သော အမျိုးအစားများကို စိုက်ပျိုးခြင်းသည် အကျိုးရှိသော နှင့် စျေးနှုန်းသက်သာသော နည်းလမ်း ဖြစ်သည်။</li>
+					    <li>
+						တုံ့ပြန်နိုင်သော အမျိုးအစားများကို အသုံးပြုပါ::
+						<ul>
+						    <li>CO 47, CO 50, ADT 36, ADT 37, ASD 16, ASD 20</li>
+						    <li>ADT 39, ASD 19, TPS 3, White Ponni</li>
+						    <li>ADT 44, BPT 5204, CORH, Palghuna</li>
+						    <li>Swarnamukhi, Swathi, Prabhat, IR-64, IR-36, Jaya</li>
+						</ul>
+					    </li>
+					    <li>Avoid Excessive Nitrogen Fertilizer Application.</li>
+					    <li>နိုက်ထရိုဂျင်ကို သုံးခုအုပ်ခွဲ၍ အသုံးပြုပါ။</li>
+					    <li>ချိုင့်များမှ ပေါင်းပင်၊မြက်ပင်များကို ဖယ်ရှားပါ။</li>
+		                            </ul>
+                                </td>
+                                <td width="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/management/Cultural Method/Avoid Excees Use of Nitrogen Fertilizer.jpg') }}" width="150" height="150" /></td>
+                                <td width="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/management/Cultural Method/Resistant variety BPT 5204.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td height="86" align="center" valign="top"><span class="style11">Avoid Excees Use of Nitrogen Fertilizer</span></td>
+                                <td align="center" valign="top"><span class="style11">Use Resistant variety<br />
+              BPT 5204</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" height="14">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" valign="top"><strong>ကြိုတင်ကာကွယ်နည်းများ</strong>
+                                    <ul class="botanybullet">
+					<li>မိုးမရွာသော လယ်ကွက်များကို ရှောင်ကြဉ်ပါ။</li>
+					<li>အစောပိုင်း စိုက်ပျိုးခြင်းကို ရှောင်ကြဉ်ပါ။</li>
+					<li>စပါးရိတ်သိမ်းပြီးနောက် ဖက်ခေါက်များကို မီးရှို့ပါ။</li>
+					<li>လယ်တန်းများနှင့် အတွင်းပိုင်းရှိ မြက်များနှင့် သစ်ပင်များကို ရှောင်ကြဉ်ပါ။</li>
+					<li>မျိုးစေ့ကို Pseudomonas fluorescens (တပ်မှုန့်ပုံစံ) ၁၀ ဂရမ်/ကီလိုဂရမ်ဖြင့် ခြောက်သွေ့စေ့ကုသပါ။</li>
+					<li>လယ်ကွက် ၂၅ မီတာရေခဲအတွင်း ၂.၅ စင်တီမီတာအထိ ရေပမာဏကို ရှင်းလင်းထားပြီး P. fluorescens (တပ်မှုန့်ပုံစံ) ၂.၅</li> ကီလိုဂရမ်ကို ရေတွင်ရောစပ်၍ လက်ပံနှစ်စက်၏ 30 မိနစ်အတွင်း လက်ဆွဲစိုက်ပျိုးပါ။
+					<li>ပြန်လည်စိုက်ပျိုးပြီး ၄၅ ရက်အတွင်း ၁၀ ရက်အတွင်းအနှံ့ သုံးကြိမ် ပိုမိုသော P. fluorescens (တပ်မှုန့်ပုံစံ) ၀.၅% ဖြင့် ပက်စိမ်ရေဖြင့် ပက်ပါ။</li>
+                                    </ul>
+                                </td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/management/Preventive Method/Avoid dry nursery.jpg') }}" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/management/Preventive Method/Root Dipping of seedlings in pseudomonas.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Avoid Dry Nursery</span></td>
+                                <td align="center" valign="top"><span class="style11">Root Dipping of Seedlings in Pseudomonas</span></td>
+                            </tr>
+                            <tr>
+                                <td height="14" align="left" colspan="3">
+                                    <hr size="1" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td rowspan="5" align="left" valign="top"><strong>ဓာတုဗေဒဆိုင်ရာနည်းလမ်းများ</strong>
+                                    <ul class="botanybullet">
+					<li>ရောဂါပျံ့နှံ့မှုကို ထိန်းချုပ်ရန် fungicides ၏ အပေါ်မှာ အများကြီး သို့မဟုတ် နည်းနည်း မပေးသင့်ပါ။</li>
+					<li>မနက် ၁၁:၀၀ မတိုင်ခင် သို့မဟုတ် ညနေ ၃:၀၀ ပြည့်ပြီးလျင် လေငှေ့ထုတ်ရန် အချိန်ကောင်းပါသည်။</li>
+					<li>နံနက် ၁၁:၀၀ နာရီမှ ၃:၀၀ နာရီအထိ အချိန်မှာ ပျံ့နှံ့မပေးပါနှင့်။</li>
+					<li>စပါးအမှုန်ကြီးများကို Captan, Carbendazim, Thiram, Tricyclazole 2.0 g/kg အတိုင်း ဆေးဖောက်ပေးပါ။</li>
+					<li>Pyroquilon နှင့် Tricyclazole တို့က ရောဂါကို ထိန်းချုပ်နိုင်သော systemic fungicides များဖြစ်သည်။</li>
+					<li>Tricyclazole 1g/lit ရောနှောပြီး Edifenphos 1 ml/lit အတိုင်း သို့မဟုတ် Carbendazim 1.0 gm/lit အတိုင်း မိမိ စိုက်ကြီးမှုအတွက် ဖျန်းပေးပါ။</li>
+					<li>စိုက်စခန်းနှင့် အပင်ပျိုးမြူးစများ၊ နှင့် မျိုးရင်းဖွားကြီးထွားအဆင့်များတွင် 3 မှ 4 ကြိမ်လေငှေ့ထုတ်ပေးသင့်သည်။</li>
+					<li>စိုက်စခန်းအဆင့်တွင် အနည်းငယ်ရောဂါဖြစ်စဉ်၌ Carbendazim သို့မဟုတ် Edifenphos @ 1.0 gm/lit ဖြင့် ဖျန်းပေးပါ။</li>
+					<li>Pre-Tillering မှ Mid-Tillering အဆင့်တွင် ရောဂါရောထပ်မှု 2% မှ 5% အတွင်းမှာ Edifenphos သို့မဟုတ် Carbendazim @ 1.0 gm/lit ဖြင့် ဆေးခြောက်ထုတ်ပေးပါ။ ရောဂါပေါ်ပေါက်နေစဉ်တွင် ဓာတ်မြေဩဇာ (N) ဆီမီးထိုးခြင်းကို နောက်ကျ၍ လုပ်ဆောင်ပါ။</li>
+					<li>Panicle အဆင့် မှ Booting အထိ 2% မှ 5% အရွက်ပျက်စီးမှုရှိပါက Edifenphos, Carbendazim, Tricyclazole @ 1.0 gm/lit ဖြင့် ဆေးခြောက်ထုတ်ပေးပါ။</li>
+					<li>ပွင့်ဖွားချိန်နှင့်ပြီးနောက် 5% အရွက်ပျက်စီးမှုသို့မဟုတ် 1% မှ 2% ခေါင်းထွက်ရောဂါရှိပါက Edifenphos, Carbendazim, Tricyclazole @ 1g/lit ဖြင့် ဖျန်းပေးပါ။</li>
+                                    </ul>
+                                </td>
+                                <td height="25" align="center" valign="middle">&nbsp;</td>
+                                <td align="center" valign="middle">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/management/Chemical Method/Spray CARBENDAZIM.jpg') }}" width="150" height="150" align="top" /></td>
+                                <td height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/management/Chemical Method/Spray EDIFENPHOS.jpg') }}" width="150" height="150" align="top" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top">Spray Carbendazim</td>
+                                <td align="center" valign="top">Spray Edifenphos</td>
+                            </tr>
+                            <tr>
+                                <td height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/management/Chemical Method/THIRAM-Seed treating fungicide.jpg') }}" width="150" height="150" align="top" /></td>
+                                <td height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/1. blast/management/Chemical Method/Treat the seeds with CAPTAN.jpg') }}" width="150" height="150" align="top" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top">Thiram-Seed Treating Fungicide</td>
+                                <td align="center" valign="top">Treat the Seeds with Captan</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td colspan="2" align="right" valign="middle">
+                                    <a href="{{ url_for('blast') }}">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+            </table>
+            <!-- end .content -->
+        </div>
+        <!-- end .container -->
+    </div>
+    <div class="footer">
+       <p>Copyright © | All Rights Reserved</p>
+       <!-- end .footer -->
+    </div>
+</body>
+
+</html>

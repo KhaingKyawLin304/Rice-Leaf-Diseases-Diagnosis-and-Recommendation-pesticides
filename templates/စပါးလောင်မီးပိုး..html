@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hispa | Rice Leaf Disease Segmentation</title>
+    <link href="{{ url_for('static', filename='style2.css') }}" rel="stylesheet" type="text/css" />
+
+
+     <style>
+        /* Root variables for color scheme */
+        :root {
+            --primary-color: #4CAF50;
+            --text-color: #333;
+            --background-color: white;
+            --hover-color: #388E3C;
+        }
+
+        /* Global styles */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     }   /* Header styles */
+/* Header styles */
+	.header {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    padding: 20px 40px; /* Increased padding for a bigger header */
+	    border-bottom: 1px solid #ddd;
+	    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	    background-color: var(--background-color);
+	    position: fixed; /* Fix the header position */
+	    width: 95%; /* Make sure header spans the full width */
+	    top: 0; /* Stick to the top of the page */
+	    left: 0; /* Align to the left edge */
+	    z-index: 1000; /* Ensure the header stays on top of other content */
+	}
+
+	/* Adjust the body content to account for the fixed header */
+	body {
+	    padding-top: 70px; /* Adjust this value based on the header height */
+	}
+
+
+        /* Logo styles */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        /* Navigation styles */
+        .nav {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--hover-color);
+        }
+        .footer {
+            text-align: center;
+            color: #666;
+            padding: 10px;
+            border-top: 1px solid #ddd; /* Top border to separate from content */
+            background-color: #f1f1f1; /* Light background color for footer */
+            margin-top: 20px; /* Space above the footer */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+    <div class="header">
+        <div class="logo">PaddyWatch</div>
+        <div class="nav">
+            <a href="{{ url_for('index') }}">ပင်မစာမျက်နှာ</a>
+            <a href="{{ url_for('upload_file') }}">စပါးရွက်ရောဂါရှာဖွေရန်</a>
+            <a href="{{ url_for('about') }}">ကျွန်ုပ်တို့အကြောင်း</a>
+            <a href="{{ url_for('contactus') }}">ဆက်သွယ်ရန်</a>
+        </div>
+    </div>
+        <div class="content">
+            <table width="1100" height="832" cellpadding="0" cellspacing="0" class="botanyfont">
+                <tr>
+                    <td width="191" height="" valign="top" class=" botany1">
+                        <table width="191" border="0" align="center">
+                            <tr class="menubg">
+                                <td class="rounded-menu" width="197" height="56" align="center" valign="middle"><b><strong> <a href="#symptom">ရောဂါလက္ခဏာများ </a></strong></td>
+                            </tr>
+                            <tr class="menubg">
+                                <td class="rounded-menu" height="58" align="center" valign="middle"><strong><a href="#Identification">ရောဂါပိုးမွှား ခွဲခြားသတ်မှတ်ခြင်း</a></strong></td>
+                            </tr>
+                            <tr class="menubg">
+                                <td class="rounded-menu" height="58" align="center" valign="middle"><strong><a href="#Mgmt">&nbsp;&nbsp;&nbsp;စီမံခန့်ခွဲမှုနည်းလမ်းများ</a></strong></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="813" colspan="2" valign="top" bgcolor="#feffe9" class="croppro">
+                        <h1 align="center"><strong>စပါးလောင်မီးပိုး(Hispa)</strong><br />
+                        </h1>
+                        <table width="760" border="0" cellspacing="2" cellpadding="2" align="center">
+                            <tr>
+                                <td width="420" bgcolor="#82c100">
+                                    <font size="3" color="#FFFF00"><b><a name="symptom" id="symptom">ရောဂါလက္ခဏာများ :</a></b></font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" valign="top"><br />
+                                    <ul>
+                                        <li>သားလောင်းအဆောင့်ပိုးငကာင်ကောင်များ၏ မြေတွင်းဖော်မှုသည် အရွက်များပေါ်တွင် ပေါ်လွင်စွာ တွေ့ရမည်။<br />
+                                        </li>
+                                        <li>အရွက်ဓာတ်ပတ်၏ အပေါ်ယံမျက်နှာပြင်ကို ခွဲထုတ်၍ အလယ်ချုပ်နောက်သို့ အဖြူရောင်ကြောင်းများဖြစ်သောအခါတွင် အောက်ခြေခေါင်းမှ အနိမ့်သော အဖုံးသားများကိုသာ ကျန်ရစ်စေသည်။<br />
+                                        </li>
+                                        <li> သားလောင်းအဆောင့်ပိုးငကာင်ကောင်များ၏ မြေတွင်းဖော်မှုက အရွက်အလယ်ချုပ်နှင့် လျော်ညီသော ခပ်မိုက်မိုက်ဖြစ်သော အဖြူရောင် အတောက်ပနေရာများကို ဖြစ်စေသည်။<br />
+                                        </li>
+                                        <li>ပျက်စီးသွားသော အရွက်များသည် ပျော့ပြတ်နေသည်။<br />
+                                        </li>
+                                        <li> စပါးလယ်ပြင်များသည် ပြင်းထန်စွာ ဖောက်ထွင်းခံရခြင်းဖြင့် မီးလောင်သည့်အနေအထားကဲ့သို့ ဖြစ်နေသည်။</li>
+                                    </ul>
+                                    <br />
+                                    <b>ပျက်စီးမှု၏ သဘောသဘာဝ:</b><br />
+                                    <ul>
+                                        <li>သားလောင်းအဆောင့်ပိုးငကာင်ကောင်များသည် အရွက်ဓာတ်ပတ်အတွင်းသို့ ထိုးဖောက်သွားပြီး ကြားသွားများကြားမှ အစိမ်းရောင် အကြွင်းအရာများကို စားသောက်နေကြသည်။</li>
+                                        <li> အရွက်များအားလုံးတွင် သားလောင်းအဆောင့်ပိုးငကာင်ကောင်များသည် အစိမ်းရောင်အကြွင်းအရာများကိုလည်း စားသောက်ကြသည်။ ၎င်းတို့သည် အနုပျိုအရွက်များကို အခြေခံပြု၍ စားသောက်ကြသည်။</li>
+                                        <li>အပင်များသည် အငယ်ဆုံးအဆင့်တွင် ပျက်စီးခံရပါသည်။</li>
+                                    </ul>
+                                </td>
+                                <td height="170" valign="top" class="tableborder"><img src="{{ url_for('static', filename='Images/Images/diseases/3. rice hispa/symptoms/Mining of leaves by grubs.jpg') }}" width="167" height="125" /></td>
+                                <td height="170" valign="top" class="tableborder"><img src="{{ url_for('static', filename='Images/Images/diseases/3. rice hispa/symptoms/Presence of beetles with scrapping on leaves.jpg') }}" width="170" height="170" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"> Mining of leaves by grubs</td>
+                                <td align="center" valign="top">Presence of beetles with scrapping on leaves</td>
+                            </tr>
+                            <tr>
+                                <td height="14" colspan="3">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="14" colspan="3" align="right">
+                                    <a href="{{ url_for('hispa') }}">
+                                        <font color="#660000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table width="760" border="0" cellspacing="2" cellpadding="2" align="center">
+                            <tr>
+                                <td height="14" bgcolor="#82c100">
+                                    <a name="Identification" id="Identification">
+                                        <font size="3" color="#FFFF00"><b>ရောဂါပိုးမွှား ခွဲခြားသတ်မှတ်ခြင်း:</b></font>
+                                    </a>
+                                </td>
+                                <td height="14" colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" valign="top"><br />
+                                    <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; သိပ္ပံနာမည် - <em>Dicladispa armigera</em><br />
+                                    <br />
+                                    <ul>
+                                        <li><strong>ဥ</strong> : <br />ဥများကို သန့်ရှင်းသော အရွက်များ၏ အဖျားပုံစံတည့်သော နေရာများတွင် တင်ပေးသည်။<br />
+                                            <br />
+                                        </li>
+                                        <li><strong>အမြှောက်ကောင်</strong> : <br /> သားလောင်းအဆောင့်ပိုးငကာင်ကောင်သည် အဝါရောင်ဖြစ်ပြီး ခပ်ပြောင်ပြောင် ဖြစ်သည်။ ၎င်းသည် အရွက်အတွင်းသို့ ထိုးဖောက်ပြီး အရွက်တွင်းအပင်မှ အစာစားသည်။ ၎င်းသည် အရွက်အတွင်းပင် ခေါက်ကပ်ပြီး ဆင်ဖြစ်လာသည်။<br />
+                                            <br />
+                                        </li>
+                                        <li><strong>အရွယ်ရောက်သောအရွက်စားပိုး (ပိုးပုတ်)</strong> : <br /> အရွယ်ရောက်သော ပိုးပုတ်သည် အနည်းငယ် စတုရန်းပုံစံရှိပြီး အရှည်နှင့် အကျယ်မှာ ၁/၆ မှ ၁/၈ လက်မ ခန့် ရှိသည်။ အရောင်မှာ အနက်ရောင် သို့မဟုတ် အနောက်အရောင်ပြောင်းသော အပြာရောင်ဖြင့် ပြည့်နေပြီး ကိုယ်တစ်ခုလုံးတွင် စွပ်များပါဝင်သည်။</li>
+                                    </ul>
+                                </td>
+                                <td height="152" valign="top" class="tableborder"><img src="{{ url_for('static', filename='Images/Images/diseases/3. rice hispa/identification of pest/hispa larva.jpg') }}" width="170" height="160" /></td>
+                                <td height="152" valign="top" class="tableborder"><img src="{{ url_for('static', filename='Images/Images/diseases/3. rice hispa/identification of pest/Hispa beetle.jpg') }}" width="170" height="160" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td height="25" align="center" valign="top">Larva</td>
+                                <td height="25" align="center" valign="top">Rice Hispa</td>
+                            </tr>
+                            <tr>
+                                <td height="148" valign="top" class="tableborder"><img src="{{ url_for('static', filename='Images/Images/diseases/3. rice hispa/identification of pest/Hispa beetle1.png') }}" width="170" height="160" /></td>
+                                <td height="148" valign="top" class="tableborder"><img src="{{ url_for('static', filename='Images/Images/diseases/3. rice hispa/identification of pest/Adult Rice Hispa.jpg') }}" width="170" height="160" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td height="24" align="center" valign="top">Rice Hispa</td>
+                                <td height="24" align="center" valign="top">Rice Hispa adult</td>
+                            </tr>
+                            <tr>
+                                <td height="16" colspan="3">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="16" colspan="3" align="right">
+                                    <a href="{{ url_for('hispa') }}">
+                                        <font color="#660000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table width="760" border="0" cellspacing="2" cellpadding="2" align="center">
+                            <tr>
+                                <td width="396" height="16" bgcolor="#82c100">
+                                    <font size="3" color="#FFFF00"><b><a name="Mgmt" id="Mgmt">စီမံခန့်ခွဲမှုနည်းလမ်းများ :</a></b></font>
+                                </td>
+                                <td height="16" colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" valign="top">
+                                    <font size="3" color="#660000"><b><br />
+              </b></font><br />
+                                    <ul>
+                                        <li>လယ်မြေများတွင် အလွန်အကျွံ အာဟာရဓာတ် မထည့်ပါနှင့်။
+                                            <br />
+                                        </li>
+                                        <li>အပင်များကို သီးခြားနေရာခွာ၍ စိုက်ခြင်းက စည်ပင်မှု့မြင့်မားသော Hispa အရေအတွက်ကို ခံနိုင်ရည်ရှိသော အရွက်သိုက်ထုများကို ဖြစ်စေသည်။
+                                            <br />
+                                        </li>
+                                        <li>အရွက်အဖျားတွင်ရှိသော အစက်အမှန်များပါဝင်သော အရွက်များကို ဖျက်ဆီးပစ်ပါ။</li>
+                                        <li>ပိုးပုတ်များကို လက်ဖြင့်ကောက်ထုတ်ပြီး သတ်ပါ - လက်သစ်နှင့် ဖမ်းဆီးပါ။</li>
+                                        <li>ပိုးပုက်များ၏ ဥများကို ထားရောင်းခြင်းကို ကာကွယ်ရန် အပင်အဖျားများကို ဖြတ်ပစ်နိုင်သည်။</li>
+                                        <li>အပင်အဖျားများကို ဖြတ်ပြီး ရေဆင်းမြေတွင် မြှုပ်ခြင်းက သားလောင်းအဆောင့်ပိုးငကာင်များ၏ အရေအတွက်ကို ၇၅% မှ ၉၂% ထိ လျော့နည်းစေနိုင်သည်။</li>
+                                        <li>Reduviid ပိုးက အရွယ်ရောက်သော ပိုးပုတ်များကို စားသုံးသည်။</li>
+                                        <li>Methyl parathion 0.05% သို့မဟုတ် Quinalphos 0.05% ဖြင့် ဖြန်းပက်ပါ။</li>
+                                    </ul>
+                                </td>
+                                <td width="172" height="134" align="center" class="tableborder"><img src="{{ url_for('static', filename='Images/Images/diseases/3. rice hispa/management/Collect beetle using hand net and destroy.jpg') }}" width="106" height="150" /></td>
+                                <td width="172" height="134" valign="middle" class="tableborder"><img src="{{ url_for('static', filename='Images/Images/diseases/3. rice hispa/management/Destroy leaf tips containing blotch mines.jpg') }}" width="170" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="middle">Collect beetle using hand net and destroy</td>
+                                <td align="center" valign="middle">Destroy leaf tips containing blotch mines</td>
+                            </tr>
+                            <tr>
+                                <td height="136" valign="middle" class="tableborder"><img src="{{ url_for('static', filename='Images/Images/diseases/3. rice hispa/management/Reduviid bug feed on adult hispa.jpg') }}" width="170" height="150" /></td>
+                                <td height="136" valign="middle" class="tableborder"><img src="{{ url_for('static', filename='Images/Images/diseases/3. rice hispa/management/Spray Methyl Parathion.jpg') }}" width="170" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="middle">Reduviid bug feed on adult hispa</td>
+                                <td align="center" valign="middle">Spray Methyl Parathion</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right" valign="top">
+                                    <a href="{{ url_for('hispa') }}">
+                                        <font color="#660000">Top</font>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- end .content -->
+        </div>
+    </div>
+    <div class="footer">
+       <p>Copyright © | All Rights Reserved</p>
+       <!-- end .footer -->
+    </div>
+</body>
+
+</html>

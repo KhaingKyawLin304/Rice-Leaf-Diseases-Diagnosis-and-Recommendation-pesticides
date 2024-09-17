@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tungro | Rice Leaf Disease Segmentation</title>
+    <link href="{{ url_for('static', filename='style2.css') }}" rel="stylesheet" type="text/css" />
+
+
+     <style>
+        /* Root variables for color scheme */
+        :root {
+            --primary-color: #4CAF50;
+            --text-color: #333;
+            --background-color: white;
+            --hover-color: #388E3C;
+        }
+
+        /* Global styles */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     }   /* Header styles */
+/* Header styles */
+	.header {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    padding: 20px 40px; /* Increased padding for a bigger header */
+	    border-bottom: 1px solid #ddd;
+	    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	    background-color: var(--background-color);
+	    position: fixed; /* Fix the header position */
+	    width: 95%; /* Make sure header spans the full width */
+	    top: 0; /* Stick to the top of the page */
+	    left: 0; /* Align to the left edge */
+	    z-index: 1000; /* Ensure the header stays on top of other content */
+	}
+
+	/* Adjust the body content to account for the fixed header */
+	body {
+	    padding-top: 70px; /* Adjust this value based on the header height */
+	}
+
+
+        /* Logo styles */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        /* Navigation styles */
+        .nav {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--hover-color);
+        }
+        .footer {
+            text-align: center;
+            color: #666;
+            padding: 10px;
+            border-top: 1px solid #ddd; /* Top border to separate from content */
+            background-color: #f1f1f1; /* Light background color for footer */
+            margin-top: 20px; /* Space above the footer */
+        }       
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+    <div class="header">
+        <div class="logo">PaddyWatch</div>
+        <div class="nav">
+            <a href="{{ url_for('index') }}">ပင်မစာမျက်နှာ</a>
+            <a href="{{ url_for('upload_file') }}">စပါးရွက်ရောဂါရှာဖွေရန်</a>
+            <a href="{{ url_for('about') }}">ကျွန်ုပ်တို့အကြောင်း</a>
+            <a href="{{ url_for('contactus') }}">ဆက်သွယ်ရန်</a>
+        </div>
+    </div>
+        <div class="content">
+            <table width="1100" height="824" border="0" class="botanyfont">
+                <tr>
+                    <td width="189" height="" valign="top" class=" botany1">
+                        <table width="192" border="0" align="center">
+                            <tr class="menubg">
+                                <td class="rounded-menu" width="186" height="56" align="center" valign="middle"><b><strong> <a href="#symptom">ရောဂါလက္ခဏာများ </a></strong></td>
+                            </tr>
+                            <tr class="menubg">
+                                <td class="rounded-menu" height="58" align="center" valign="middle"><strong><a href="#Identification">ရောဂါပိုးမွှား ခွဲခြားသတ်မှတ်ခြင်း</a></strong></td>
+                            </tr>
+                            <tr class="menubg">
+                                <td class="rounded-menu" height="58" align="center" valign="middle"><strong><a href="#Mgmt">&nbsp;&nbsp;&nbsp;စီမံခန့်ခွဲမှုနည်းလမ်းများ</a></strong></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="805" colspan="2" valign="top" bgcolor="#fffff0" class="croppro">
+                        <h1 align="center" size="2"><strong>တန့်ဂရိုရောဂါ (Tungro)</strong> </h1>
+                        <table width="750" border="0" align="center">
+                            <tr>
+                                <td width="436" bgcolor="#92b223"><b><font color="#ffff1f" size="4"> <a name="symptom" id="symptom"></a>ရောဂါလက္ခဏာများ </font></b></td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td colspan="2" align="center" valign="middle"> </td>
+                            </tr>
+
+                            <tr>
+                                <td rowspan="5">
+                                    <ul class="botanybullet">
+                                        <li>တန့်ဂရိုကြောင့် ထိခိုက်သည့်အပင်များသည် နှောင့်နှေးခြင်းနှင့် ထွန်ယက်ခြင်းများကို လျော့နည်းစေသည်။ ၎င်းတို့၏ အရွက်များသည် အဝါရောင် သို့မဟုတ် လိမ္မော်ရောင် ဖြစ်လာကာ သံချေးရောင် အစက်အပြောက်များ ရှိနိုင်သည်။</li>
+                                        <li>အရောင်ပြောင်းလဲမှုသည် အရွက်ထိပ်မှ စတင်ကာ အရွက်အပေါ် သို့မဟုတ် အောက်ပိုင်းသို့ ဆက်လက်ပြောင်းလဲသည်။</li>
+                                        <li>ပန်းပွင့်ချိန် နောက်ကျခြင်း - ပန်းပွင့်များ သို့မဟုတ် စပါးရွက်များသည် သေးငယ်ပြီး လုံးလုံးလျားလျား မပွင့်စေပါ။</li>
+                                        <li>အုတ်စပါးအများစုသည် မြုံထားသော သို့မဟုတ် တစ်စိတ်တစ်ပိုင်းပြည့်သော အစေ့များဖြစ်သည်။ </li>
+                                        <li>တန့်ဂရိုဗိုင်းရပ်စ်ရောဂါသည် စပါးပင်၏ ကြီးထွားမှုအဆင့်အားလုံးကို အထူးသဖြင့် ပေါက်ပွားသည့်အဆင့်တွင် သက်ရောက်မှုရှိသည်။</li>
+                                    </ul>
+                                    <br />
+                                    <p><strong>ထူးခြားသော ရောဂါသိရှိနည်း</strong></p>
+
+                                    <ul class="botanybullet">
+                                        <li>မနက် ၆ နာရီတွင် အရွက်နမူနာများကို စုဆောင်းပါ။</li>
+                                        <li>အရွက်၏ ထိပ်ပိုင်း ၁၀ စင်တီမီတာ အပိုင်းကို အိုင်အိုဒင်း ၂ ဂရမ် နှင့် ပိုတက်စီယမ် အိုင်အိုဒိုက် 6 ဂရမ် ပါဝင်သော ဖျော်ရည်တွင် ရေ 100 ml တွင် 15 မိနစ် သို့မဟုတ် အိုင်အိုဒင်း 10 ml နီယာတင်းနှင့် ရေ 140 ml ကို တစ်နာရီကြာ ဆေးကြောပါ။ရေတွင် သန့်ရှင်းပြီး စစ်ဆေးပါ။</li>
+                                        <li> တန့်ဂရို ရောဂါပိုးရှိသော အရွက်များသည် နက်ပြာရောင် အစင်းကြောင်းများ ဖြစ်ပေါ်လာသည်။</li>
+                                    </ul>
+                                </td>
+                                <td width="150" height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/symptoms/1-yellowing from tip to downwards.JPG') }}" width="150" height="150" /></td>
+                                <td width="150" height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/symptoms/2-Stunted with Reduced tillering.JPG') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">ထိပ်ဖျားမှ အောက်သို့ အဝါရောင်</span></td>
+                                <td align="center" valign="top"><span class="style11">Stunted with Reduced Tillering</span></td>
+                            </tr>
+                            <tr>
+                                <td width="150" height="24" align="center" valign="middle">&nbsp;</td>
+                                <td align="center" valign="middle">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/symptoms/3-completely withered plant.JPG') }}" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/symptoms/4-Tungro affected field.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">လုံးဝညှိုးနွမ်းသောအပင်</span></td>
+                                <td align="center" valign="top"><span class="style11">တန့်ဂရိုဘေးဒဏ်သင့်လယ်ပြင်</span></td>
+                            </tr>
+                            <tr>
+                                <td height="7" colspan="3">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="24" colspan="3" align="right" valign="middle">
+                                    <a href="{{ url_for('tungro') }}"">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table><br />
+                        <table width="750" border="0" align="center">
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td width="436" bgcolor="#92B223"><b><font color="#ffff1f" size="4"><strong><a name="Identification" id="Identification"></a>ရောဂါပိုးမွှား ခွဲခြားသတ်မှတ်ခြင်း</strong></font></b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td align="center" valign="middle"></td>
+                            </tr>
+                            <tr>
+                                <td width="150" height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/identification of pathogen/rice tungro baciliform virus particle.jpg') }}" width="150" height="150" /></td>
+                                <td width="150" height="150"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/identification of pathogen/rice tungro spherical virus.jpg') }}" width="150" height="150" /></td>
+                                <td rowspan="4" align="left" valign="top">
+                                    <ul class="botanybullet">
+                                        <li>တန့်ဂရိုဗိုင်းရပ်စ်ရောဂါသည် သစ်ရွက်ခြောက်ကောင်(leafhoppers)ဖြင့် ကူးစက်သည်။ အထူးသဖြင့် အထိရောက်ဆုံး ဗက်တာမှာ စိမ်းရောင် သစ်ရွက်ခြောက်ကောင် Nephotettix virescens (Distant) ဖြစ်သည်။ ရောဂါစုံသည် ဆန်တန့်ဂရို ဘက်ဆီလိုဖောင်းဗိုင်းရပ်စ် (RTBV) နှင့် ဆန်တန့်ဂရို သာကွိုဗိုင်းရပ်စ် (RTSV) နှင့် ပတ်သက်နေသည်။ RTBV သည် RTSV မရှိဘဲ အရွက်ဖျက်သူများဖြင့် ဖြန့်ဝေရန် မရနိုင်ပါ။</li>
+                                        <li>အင်းဆက်ပိုးမွှားများသည် ရောဂါပိုးရှိသော အပင်၏ မည်သည့်အစိတ်အပိုင်းများမှမဆို ဗိုင်းရပ်စ်ကို ရယူနိုင်သည်။ ဗိုင်းရပ်စ်ကူးစက်ခံရပြီးနောက်၊ ဗိုင်းရပ်စ်ပိုးသည် အပင်များသို့ ချက်ချင်း ကူးစက်နိုင်သည်။</li>
+                                        <li>RTBV အမှုန်များသည် တုတ်ပုံသဏ္ဌာန်ရှိပြီး အလျား 100-300 nm နှင့် အကျယ် 30-35 nm ဖြစ်သည်။ ၎င်းတွင် DNA 8.3 kb ပါရှိသည်။ RTSV အမှုန်များသည် isometric နှင့် 30 nm အချင်းဖြစ်သည်။ ၎င်းတွင် polyadenylated single-stranded RNA သည် 12 kb ခန့်ရှိသည်။။</li>
+                                    </ul>
+                                    <p><strong>ရောဂါဖွံ့ဖြိုးမှုကို အထောက်အကူပြုသော အကြောင်းအရင်းများ</strong></p>
+                                    <ul class="botanybullet">
+                                        <li>ဗိုင်းရပ်စ် အရင်းအမြစ်ရှိခြင်း။</li>
+                                        <li>ဗက်တာ(vector) ရှိခြင်း။</li>
+                                        <li>အိမ်ရှင်အပင်များ၏ အသက်အရွယ်နှင့် ခံနိုင်ရည်ရှိခြင်း။</li>
+                                        <li>အထက်ပါ သုံးခုတစ်ခုချင်းစီ၏ ကိုက်ညီမှု။</li>
+                                        <li>အထူးသဖြင့် စပါးပင်၏ ကြီးထွားမှုအဆင့်အားလုံးသည် အသီးအပွင့်အဆင့်ဖြစ်သည်။</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="labelline">
+                                <td height="10" align="center" valign="top"><span class="style11">Rice Tungro Baciliform Virus Particle</span></td>
+                                <td height="10" align="center" valign="top"><span class="style11">Rice Tungro Spherical Virus</span></td>
+                            </tr>
+                            <tr>
+                                <td height="150" colspan="2" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/identification of pathogen/virus.jpeg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center" valign="top"><span class="labelline">Virus</span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">
+                                    <a href="{{ url_for('tungro') }}"">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table width="750" border="0" align="center">
+                            <tr>
+                                <td width="436" bgcolor="#92b223"><b><font color="#ffff1f" size="4"><a name="Mgmt" id="Mgmt"></a>စီမံခန့်ခွဲမှုနည်းလမ်းများ</font></b></td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="2" align="center" valign="middle"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" valign="top"><strong>သတ်မှတ်နည်းလမ်းများ</strong>
+                                    <ul class="botanybullet">
+                                        <li>သစ်ရွက်ခြောက်ကောင်များကို ဆွဲဆောင်ရန်နှင့် အရေအတွက်ကို စောင့်ကြည့်ရန် အလင်းထောင်ချောက်များကို တပ်ဆင်ရမည်ဖြစ်သည်။</li>
+                                        <li>နံနက်စောစောတွင် ပိုးသတ်ဆေးဖြန်း/ဖုန်မှုန့်ဖြင့် အလင်းထောင်ချောက်အနီးရှိ သစ်ရွက်ခြောက်ကောင်များကို သတ်သင့်သည်။</li>
+                                        <li>ဤလုပ်ဆောင်မှုကို နေ့စဉ် လုပ်ဆောင်ပါ။</li>
+                                    </ul>
+                                    <br /></td>
+                                <td width="150" height="150" align="center" valign="middle"><a href="cultivationpractices3.html"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/management/Trap Method/TNAU-LIGHT TRAP.jpg') }}" width="150" height="150" /></a></td>
+                                <td width="150" height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/management/Trap Method/Spray Fenthion near traps.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">TNAU-Light Trap</span></td>
+                                <td align="center" valign="top"><span class="style11">Spray Fenthion Near Traps</span></td>
+                            </tr>
+                            <tr>
+                                <td height="56" valign="top">&nbsp;</td>
+                                <td align="center" valign="middle">&nbsp;</td>
+                                <td align="center" valign="middle">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5" valign="top"><strong>ရိုးရာနည်းလမ်းများ</strong>
+                                    <ul class="botanybullet">
+                                        <li>တန့်ဂရိုဗိုင်းရပ်စ်ရောဂါကို ခံနိုင်ရည်ရှိသော ပျိုးပင်များ စိုက်ပျိုးခြင်းသည် ရောဂါကို ထိန်းညှိရာတွင် အသက်သာဆုံးနည်းလမ်းဖြစ်သည်။</li>
+                                        <li>IR 36၊ IR 50 ၊ADT 37၊ Ponmani၊ Co 45၊ Co 48၊ Surekha၊ Vikramarya၊ Bharani၊ IR 36 နှင့် အဖြူရောင် ponni ကဲ့သို့သော ခံနိုင်ရည်ရှိသော မျိုးကွဲများကို အသုံးပြုပါ။</li>
+                                        <li>အလားတူပင်၊ ရောဂါပိုးမွှားများနှင့် ဗိုင်းရပ်စ်ပိုးများကို ဖယ်ရှားရန် အနည်းဆုံး တစ်လကြာ ပလပ်သည့်ကာလ(fallow period)ကို စောင့်ကြည့်ပါ။</li>
+                                        <li>ကပ်ရောဂါဖြစ်ပွားသည့်နေရာများတွင် ပဲမျိုးစုံ သို့မဟုတ် ဆီစေ့များဖြင့် ပြန်လည်စိုက်ပျိုးခြင်းကို လိုက်နာပါ။</li>
+                                        <li>နနမ်ကိတ်ကို အခြေခံဆေးအဖြစ် ၁၂.၅ ကီလိုဂရမ်/၂၀ ဆင့် ပျိုးခင်းတွင် အသုံးပြုပါ။</li>
+                                        <li>စပါးပင်များကို ရိတ်သိမ်းပြီးသည့်နောက်တွင် စပါးခင်းများကို လယ်ထွန်ခြင်း နှင့် ထွန်ယက်ခြင်းတို့ကို ပြုလုပ်ရန် အကြံပြုလိုပါသည်။</li>
+                                        <li>ပေါင်းပင်များရှိ ပေါင်းများကို ဖျက်ဆီးခြင်း။</li>
+                                    </ul>
+                                </td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/management/cultural method/Apply Neem Cake to nursery.jpg') }}" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/management/cultural method/Ploughing to Incorporate Stubbles.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Apply Neem Cake to nursery</span></td>
+                                <td align="center" valign="top"><span class="style11">Ploughing to Incorporate Stubbles</span></td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="middle">&nbsp;</td>
+                                <td align="center" valign="middle">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/management/cultural method/Resistant Variety-ADT 37.jpg') }}" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/management/cultural method/Use Resistant Variety- CO 48.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Use Resistant Variety<br />
+              ADT 37</span></td>
+                                <td align="center" valign="top"><span class="style11">Use Resistant Variety<br />
+              CO 48</span></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td height="40" valign="top">&nbsp;</td>
+                                <td align="center" valign="top">&nbsp;</td>
+                                <td align="center" valign="top">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5" align="left" valign="top"><strong>ဓာတုဗေဒဆိုင်ရာနည်းလမ်းများ</strong>
+                                    <ul class="botanybullet">
+                                        <li> အရွက်အဝါရောင်ခြင်းကို 2% ယူရီးယားနှင့် 2.5 ဂရမ်/လီတာဖြင့် အမျိုးအစားခွဲမှုကို ရေဆေးခြင်းဖြင့် လျော့နည်းစေပါ။ </li>
+                                        <li>ယူရီးယားအစား Multi-K (ပိုတက်ရှီယမ်နိုက်ထရိတ်) ၁% ဖြင့် ပက်ဖြန်းနိုင်သည်။ ဤသည်က ပိုမိုကျန်းမာအောင် သက်ရောက်စေသည်။ </li>
+                                        <li>အရွက်ဖျက်သူများကို အချိန်မီ ထိရောက်စွာ ထိန်းချုပ်ရန် ရေဆေးပါ။</li>
+                                        <li> ပိုးသတ်ဆေး နှစ်ကြိမ်၊ စိုက်ပျိုးပြီး ၁၅ ရက်နှင့် ၃၀ ရက်တို့တွင် ဖြန်းပေးပါ။</li><br />
+
+                                        <p><strong>အောက်ဖော်ပြပါ ပိုးသတ်ဆေးများထဲမှ တစ်ခုခုကို နှစ်ခါဖြန်းပါ။</strong></p>
+                                        <ul class="botanybullet">
+
+                                            <li>Fenthion 100 EC (40 မီလီလီတာ/ဧရိယာ) ကို စိုက်ပြီး 15 ရက်နှင့် 30 ရက်အကြာတွင် ဖျန်းပေးနိုင်ပါသည်။</li>
+                                            <li>ပေါင်းများရှိ ပေါင်းများကိုလည်းပိုးသတ်ဆေးများဖြင့်ပက်ဖြန်းသင့်သည်။ ပျိုးခင်း၌ရေ 2.5 စင်တီမီတာကိုထိန်းသိမ်းထားပြီး 20 ဆင့် Carbofuran 3 G 3.5 KG (သို့မဟုတ်) Phorate 10 G 1.0 KG Phorate 10 G 1.0 ကီလိုဂရမ် (သို့မဟုတ်) quincephos 5 g 2.0 ကီလိုဂရမ်။</li>
+                                            <li>ဗိုဗိုင်းရပ်စ်ကူးစက်မှုနည်းသောအခါ ပျိုးခင်းတွင် ကာဘိုဖူရန်အစေ့များ @ 1 ကီလိုဂရမ်/ဟက်တာ ပမာဏကို ထိန်းချုပ်ရန် ပိုးမွှားလူဦးရေကို ထိန်းချုပ်ပါ</li>
+                                            <li>အကြိုထွန်ယက်ခြင်းမှ လယ်ထွန်ခြင်းအတွင်း ပိုးကောင်ကျုံ့ခြင်းကို ထိန်းချုပ်ရန် Carbofuran granules @ 3.5kg/ha ကို အသုံးပြုပါ။</li>
+                                        </ul>
+                                    </ul>
+                                </td>
+                                <td height="68" align="center" valign="middle">&nbsp;</td>
+                                <td align="center" valign="middle">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/management/chemical method/Apply Carbofuran.jpg') }}" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/management/chemical method/Apply phorate.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Apply Carbofuran</span></td>
+                                <td align="center" valign="top"><span class="style11">Apply phorate</span></td>
+                            </tr>
+                            <tr>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/management/chemical method/Foliar Spray of Multi-K.jpg') }}" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/4. tungro/management/chemical method/Spraying of Urea + Mancozeb.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Foliar Spray of Multi-K</span></td>
+                                <td align="center" valign="top"><span class="style11">Spraying of<br />
+              Urea + Mancozeb</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">
+                                    <a href="{{ url_for('tungro') }}"">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+            </table>
+            <!-- end .content -->
+        </div>
+    </div>
+    <div class="footer">
+       <p>Copyright © | All Rights Reserved</p>
+       <!-- end .footer -->
+    </div>
+</body>
+
+</html>

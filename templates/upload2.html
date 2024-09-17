@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rice Leaf Disease Segmentation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            padding: 10px 0;
+        }
+        .header h1 {
+            margin: 0;
+            color: #007bff;
+            font-size: 1.8rem;
+        }
+        .content {
+            display: flex;
+            align-items: center; /* Center content vertically */
+            justify-content: space-between; /* Space between text and image */
+            padding: 10px 0;
+        }
+        .text-section {
+            flex: 1; /* Takes up available space */
+            padding: 10px;
+            max-width: 50%; /* Limits width to half of the container */
+        }
+        .text-section h2 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .text-section p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+        .image-section {
+            flex: 1; /* Takes up available space */
+            display: flex;
+            justify-content: center; /* Center image horizontally */
+            align-items: center; /* Center image vertically */
+            padding: 10px;
+        }
+        .image-section img {
+            max-width: 70%; /* Adjusted size */
+            height: auto;
+            border-radius: 5px;
+        }
+        .drop-zone {
+            border: 2px dashed #cccccc;
+            border-radius: 10px;
+            padding: 40px; /* Increased padding */
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            min-height: 200px; /* Minimum height for better visibility */
+            display: flex; /* Flex to center text vertically */
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* Center text vertically */
+        }
+        .drop-zone:hover {
+            background-color: #eaf4ff;
+            border-color: #007bff;
+        }
+        .drop-zone p {
+            margin: 0;
+            font-size: 18px; /* Larger font size */
+            color: #666;
+        }
+        .file-input {
+            display: none;
+        }
+        .file-name {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Rice Leaf Disease Segmentation</h1>
+        </div>
+        <div class="content">
+            <div class="text-section">
+                <h2>Identify and Analyze Rice Leaf Diseases</h2>
+                <p>
+                    Upload an image of a rice leaf and use our advanced segmentation model to identify various diseases. 
+                    Our tool helps farmers and researchers detect issues like Blast, Brown Spot, and more, ensuring timely 
+                    intervention and treatment.
+                </p>
+                <form id="uploadForm" method="post" enctype="multipart/form-data">
+                    <div id="dropZone" class="drop-zone">
+                        <p>Drag your image here or click to select</p>
+                        <input type="file" name="file" id="fileInput" class="file-input" accept="image/*">
+                    </div>
+                    <div id="fileName" class="file-name"></div>
+                    <input type="submit" value="Upload" class="btn">
+                </form>
+            </div>
+            <div class="image-section">
+                <img src="{{ url_for('static', filename='rice.jpg') }}" alt="Rice Leaf Image">
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Rice Leaf Disease Segmentation. All rights reserved.</p>
+        </div>
+    </div>
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileNameDisplay = document.getElementById('fileName');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('hover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('hover');
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('hover');
+            if (event.dataTransfer.files.length) {
+                fileInput.files = event.dataTransfer.files;
+                updateFileName();
+                // Optionally, auto-submit form on drop
+                // document.getElementById('uploadForm').submit();
+            }
+        });
+
+        fileInput.addEventListener('change', updateFileName);
+
+        function updateFileName() {
+            const file = fileInput.files[0];
+            if (file) {
+                fileNameDisplay.textContent = `Selected file: ${file.name}`;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        }
+    </script>
+</body>
+</html>
+

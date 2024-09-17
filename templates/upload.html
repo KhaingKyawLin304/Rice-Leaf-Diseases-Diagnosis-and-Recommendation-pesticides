@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Rice Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image for Rice Disease Detection</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="file-input">
+            <input type="submit" value="Upload" class="btn">
+        </form>
+    </div>
+</body>
+</html>

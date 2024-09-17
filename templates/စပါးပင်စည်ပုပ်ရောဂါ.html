@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sheath Blight | Rice Leaf Disease Segmentation</title>
+    <link href="{{ url_for('static', filename='style2.css') }}" rel="stylesheet" type="text/css" />
+
+
+     <style>
+        /* Root variables for color scheme */
+        :root {
+            --primary-color: #4CAF50;
+            --text-color: #333;
+            --background-color: white;
+            --hover-color: #388E3C;
+        }
+
+        /* Global styles */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     }   /* Header styles */
+/* Header styles */
+	.header {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    padding: 20px 40px; /* Increased padding for a bigger header */
+	    border-bottom: 1px solid #ddd;
+	    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	    background-color: var(--background-color);
+	    position: fixed; /* Fix the header position */
+	    width: 95%; /* Make sure header spans the full width */
+	    top: 0; /* Stick to the top of the page */
+	    left: 0; /* Align to the left edge */
+	    z-index: 1000; /* Ensure the header stays on top of other content */
+	}
+
+	/* Adjust the body content to account for the fixed header */
+	body {
+	    padding-top: 70px; /* Adjust this value based on the header height */
+	}
+
+
+        /* Logo styles */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        /* Navigation styles */
+        .nav {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .footer {
+            text-align: center;
+            color: #666;
+            padding: 10px;
+            border-top: 1px solid #ddd; /* Top border to separate from content */
+            background-color: #f1f1f1; /* Light background color for footer */
+            margin-top: 20px; /* Space above the footer */
+        }
+        .nav a:hover {
+            color: var(--hover-color);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+    <div class="header">
+        <div class="logo">PaddyWatch</div>
+        <div class="nav">
+            <a href="{{ url_for('index') }}">ပင်မစာမျက်နှာ</a>
+            <a href="{{ url_for('upload_file') }}">စပါးရွက်ရောဂါရှာဖွေရန်</a>
+            <a href="{{ url_for('about') }}">ကျွန်ုပ်တို့အကြောင်း</a>
+            <a href="{{ url_for('contactus') }}">ဆက်သွယ်ရန်</a>
+        </div>
+    </div>
+        <div class="content">
+            <table width="1100" height="824" border="0" class="botanyfont">
+                <tr>
+                    <td width="191" height="" valign="top" class=" botany1">
+                        <table width="191" border="0" align="center">
+                            <tr class="menubg">
+                                <td class="rounded-menu" width="181" height="56" align="center" valign="middle"><b><strong> <a href="#symptom">ရောဂါလက္ခဏာများ </a></strong></td>
+                            </tr>
+                            <tr class="menubg">
+                                <td class="rounded-menu" height="58" align="center" valign="middle"><strong><a href="#Identification">ရောဂါပိုးမွှား ခွဲခြားသတ်မှတ်ခြင်း</a></strong></td>
+                            </tr>
+                            <tr class="menubg">
+                                <td class="rounded-menu" height="58" align="center" valign="middle"><strong><a href="#Mgmt">&nbsp;&nbsp;&nbsp;စီမံခန့်ခွဲမှုနည်းလမ်းများ</a></strong></td>
+                            </tr>
+                        </table> <br /></td>
+                    <td width="803" colspan="2" valign="top" bgcolor="#fffff0" class="croppro">
+                        <h1 align="center" size="2"><strong> စပါးပင်စည်ပုပ်ရောဂါ(Sheath Blight)</strong><br /> (
+                            <em>Rhizoctonia solani</em>) </h1>
+                        <br />
+                        <table width="750" border="0" align="center">
+                            <tr>
+                                <td width="436" bgcolor="#92b223"><b><font color="#ffff1f" size="4"> <a name="symptom" id="symptom"></a>ရောဂါလက္ခဏာများ  </font></b></td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="2" align="center" valign="middle"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">
+                                    <ul class="botanybullet">
+
+                                        <li>ဖုန်စေးသည် သီးနှံ၏ အဆင့်ဆင့်ကာလမှ ခေါင်းတောက်စဉ်အဆင့်ထိ ထိခိုက်စေသည်။</li>
+                                        <li>မူလလက္ခဏာများသည် ရေမျက်နှာပြင်အနီးရှိ အရွက်အထည်အပေါ်တွင် တွေ့ရှိရသည်။</li>
+                                        <li>အရွက်အထည်အပေါ်တွင် အိုဗယ်ပုံသဏ္ဌာန်၊ ရှုခင်းသဏ္ဍာန်သို့မဟုတ် မကြီးမငယ် အညိုစိမ်းရောင် အပြောက်အဖတ်များ ဖြစ်ပေါ်လာသည်။ </li>
+                                        <li>အပြောက်များသည် ကြီးထွားလာခြင်းနှင့်အတူ အလယ်ပိုင်းသည် အညိုဖြူရောင်ဖြစ်လာပြီး အညိုရောင်သို့မဟုတ် စပ်ရှုးရောင် အနားကြီးဖြင့် အနက်ရောင်အနားဖြစ်လာသည်။</li>
+                                        <li>အပင်၏ အပေါ်ပိုင်းများပေါ်ရှိ အပြောက်များသည် လျင်မြန်စွာ တိုးတက်လာပြီး အပြောက်များတွဲလက်စွာဖြင့် ရေလိုင်းမှ အမှတ်သေးများအထိ အရှုံးထည့်ပါသည်။</li>
+                                        <li>အရွက်အထည်အပေါ်တွင် ကြီးမားသော အပြောက်များစွာရှိနေခြင်းသည် အရွက်တစ်ခုလုံး၏ သေဆုံးခြင်းကို ဖြစ်စေပြီး အတွင်းမှာ အပင်လုံးသေဆုံးနိုင်သည်။</li>
+                                        <li>အရွက်အထည်၏ အတွင်းသို့ ရောဂါဖြစ်ပွားမှုသည် အပင်လုံး၏ သေဆုံးခြင်းကို ဖြစ်စေသည်။</li>
+                                        <li>အရွယ်ရောက်သော အပင်များသည် ရောဂါကူးစက်မှု အလွန်ထိခိုက်လွယ်သည်။</li>
+                                        <li>ငှက်ဖျားနှင့် ခေါင်းတောက်ခြင်းအဆင့်တွင် အရွက်အထည်တစ်ခုသည် ၅ မှ ၆ ပတ်အထိ ထိခိုက်လွယ်သည်။</li>
+                                        <li>ဦးစီးအနားအရပ်များတွင် ရောဂါကူးစက်လျက်ရှိသောအခါ နိမ့်ဆုံးသော အရွက်များတွင် တိုးပွားလာသည့် သီးနှံများသည် ကောင်းစွာပေါက်ပွားခြင်းမရှိပဲ ချိန်မှားထိနယ်သည့်အခါ အထွက်ပြတ်လပ်မှု ၂၅% ဖြစ်ပေါ်ခဲ့သည်။</li>
+                                    </ul>
+                                </td>
+                                <td width="150" height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/symptoms/1-elliptical or irregular greenish grey spots on sheaths.JPG') }}" alt="1-elliptical or irregular greenish grey spots on sheaths" width="150" height="150" /></td>
+                                <td width="150" height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/symptoms/2-Blightening of sheath near water level.JPG') }}" alt="2-Blightening of sheath near water level" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td height="10" align="center" valign="top"><span class="style11">Elliptical or Irregular Greenish Grey Spots on Sheaths</span></td>
+                                <td height="10" align="center" valign="top"><span class="style11">Blightening of Sheath near Water Level</span></td>
+                            </tr>
+                            <tr>
+                                <td height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/symptoms/3-Blightening of sheath.JPG') }}" alt="3-Blightening of sheath" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/symptoms/4-discoloration of sheath.JPG') }}" alt="4-discoloration of sheath" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Blightening of Sheath</span></td>
+                                <td align="center" valign="top"><span class="style11">Discoloration of Sheath</span></td>
+                            </tr>
+                            <tr>
+                                <td height="7" colspan="3">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="24" colspan="3" align="right" valign="middle">
+                                    <a href="{{ url_for('sheathblight') }}">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table width="750" border="0" align="center">
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td width="436" bgcolor="#92B223"><b><font color="#ffff1f" size="4"><strong><a name="Identification" id="Identification"></a>ရောဂါလက္ခဏာများ </strong></font></b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td align="center" valign="middle"></td>
+                            </tr>
+                            <tr>
+                                <td width="150" height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/identification of pathogen/Old culture of Rhizoctonia solani.JPG') }}" alt="Old culture of Rhizoctonia solani" width="150" height="150" /></td>
+                                <td width="150" height="150" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/identification of pathogen/rhizoctania solani.jpg') }}" alt="rhizoctania solani" width="150" height="150" /></td>
+                                <td rowspan="4" align="left" valign="top">
+                                    <ul class="botanybullet">
+                                        <li>ရောဂါသည် soilborne အမျိုးအစားဖြစ်သည်။ </li>
+                                        <li>ပိုးသည် ရှည်လျားသော ဆဲလ်များကို ထုတ်လုပ်လေ့ရှိပြီး၊ ၎င်းတို့သည် နုချိန်တွင် ဖြူပြီး အဟောင်းမှာ အဝါရောင် သို့မဟုတ် အညိုရောင်ဖြစ်တတ်သည်။ </li>
+                                        <li>ပိုးသည် **ပင်လယ်မင်းပုံစံ (sclerotia)**များကို ကြီးမားစွာ ထုတ်လုပ်လေ့ရှိပြီး၊ စတင်စဉ်တွင် ဖြူရောင်ဖြစ်ပြီး နောက်ပိုင်းတွင် အညိုရောင် သို့မဟုတ် စပ်ရှုးရောင်သို့ ပြောင်းလဲသည်။</li>
+                                        <li> mycelium ၃ မျိုးရှိသည်: runner hyphae, lobate hyphae, and monilioid cells. </li>
+                                        <li>**sclerotia**များသည် မြင်တက်များမှ ကြီးမားသော အစုအဝေးကို ဖွဲ့စည်းထားသည်။ ၎င်းတို့သည် မမှန်မကန်၊ အကောက်ခိုင်သော နည်းပညာများဖြင့် ဖွဲ့စည်းထားပြီး၊ နုချိန်တွင် ဖြူကာ အဟောင်းသည် အညိုရောင် သို့မဟုတ် အနက်ရောင်ဖြစ်တတ်သည်။ ပင်လယ်မင်းပုံစံ (sclerotia) တစ်ခုစီ၏ အချင်းသည် ၁-၆ မီလီမီတာ ဖြစ်ပြီး၊ ကြီးမားသော **sclerotia**များသည် ပိုမိုပြင်းထန်သော ရောဂါဖြစ်စေတတ်သည်။</li>
+                                    </ul>
+
+                                    <p><br />
+                                        <strong>ရောဂါသင့်လျော်သော အခြေအနေများ:</strong></p>
+                                    <ul class="botanybullet">
+                                        <li>sclerotia သို့မဟုတ် ရောဂါပိုးအရေအတွက်များ ရေမျက်နှာပြင်ပေါ်တွင် လွှင့်ပျံနေခြင်း</li>
+                                        <li>မြေဆီကျပ်သည့် ရောဂါပိုးရှိခြင်း</li>
+                                        <li>အချိုးအဆ 96% မှ 100% အထိ</li>
+                                        <li>အပူချိန် 28-32°C</li>
+                                        <li>အဇီဝမြေဩဇာ (နိုက်ထရိုဂျင်) အလွန်အကျွံသုံးစွဲခြင်း</li>
+                                        <li>သီးနှံစိုက်ပျိုးနႈန်းများ မြင့်မားခြင်း သို့မဟုတ် စိုက်ပျိုးခင်းကပ်နေခြင်း</li>
+                                        <li>မိုးအထပ်ထပ်ရွာခြင်း</li>
+                                    </ul>
+
+                                    <p><strong><br />
+                Mode of  Spread and Survival </strong></p>
+                                    <ul class="botanybullet">
+                                        <li>ပိုးကာရိုဏ်းသည် sclerotia သို့မဟုတ် မြင်တက်အဖြစ် မြေထဲ၌ အခြောက်ချိန်တွင် 20 လခန့် အသက်ရှင်နိုင်သည်၊ သို့သော် စိုထိုင်းစေရေရှိနေသော မြေ၌ 5-8 လ အထိသာ အသက်ရှင်နိုင်သည်။</li>
+                                        <li>**sclerotia**သည် ရေလွှဲတော်ဘောင်ဖြင့် ဖြန့်ဝေသည်။ </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="labelline">
+                                <td height="10" align="center" valign="top"><span class="style11">Old Culture of Rhizoctonia Solani</span></td>
+                                <td height="10" align="center" valign="top"><span class="style11">Rhizoctania Solani</span></td>
+                            </tr>
+                            <tr>
+                                <td align="center" height="150" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/identification of pathogen/sheath blight pathogen.jpg') }}" alt="sheath blight pathogen" width="150" height="150" /></td>
+                                <td align="center" height="150" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/identification of pathogen/Young culture of Rhizoctonia solani.JPG') }}" alt="Young culture of Rhizoctonia solani" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Sheath Blight Pathogen</span></td>
+                                <td align="center" valign="top"><span class="style11">Young Culture of Rhizoctonia Solani</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">
+                                    <a href="{{ url_for('sheathblight') }}">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table width="750" border="0" align="center">
+                            <tr>
+                                <td width="436" bgcolor="#92b223"><b><font color="#ffff1f" size="4"><a name="Mgmt" id="Mgmt"></a>စီမံခန့်ခွဲမှုနည်းလမ်းများ</font></b></td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="2" align="center" valign="middle"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" valign="top"><strong>ကြိုတင်ကာကွယ်နည်းများ</strong>
+                                    <ul class="botanybullet">
+                                        <li>မျိုးစေ့ကို Pseudomonas fluorescens ဖြင့် 10 ဂရမ်/ကီလိုဂရမ်နှုန်း ဖြည့်စွက်၍ မျိုးစေ့အငွေ့ထည့်ခြင်းကို 2.5 ကီလိုဂရမ်/ထောင်ဧရိယာနှုန်းဖြင့် 100 လီတာ ရေထဲတွင် ရောစပ်၍ 30 မိနစ်ခန့် ရှုပ်ထွေးစေပါ။ </li>
+                                        <li>P.fluorescens ကို မြေကြီးထည့်သွင်းခြင်းကို အရွက်လဲခြင်းပြီး 30 ရက်အကြာတွင် 2.5 ကီလိုဂရမ်/ဧရိယာနှုန်းဖြင့် အသုံးပြုပါ (ဤထုတ်ကုန်ကို FYM/သဲ 50 ကီလိုဂရမ်နှင့် ရောစပ်ပြီး အပြင်သို့ သုံးပါ)။</li>
+                                        <li>Pseudomonas fluorescens ဖြင့် အရွက်ကို ရေမှုတ်ခြင်းကို အရွက်လဲပြီး 45 ရက်အကြာမှ စ၍ 10 ရက်ခြားကာရောဂါ၏ အဆင့်အလိုက် 3 ကြိမ်အထိ 0.2% အလျော့အထားဖြင့် လုပ်ဆောင်ပါ။</li>
+                                    </ul>
+                                </td>
+                                <td width="150" height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/management/preventive method/mixing of PSEUDOMONAS with FYM.jpg') }}" alt="mixing of PSEUDOMONAS with FYM" width="150" height="150" /></td>
+                                <td width="150" height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/management/preventive method/SEED TREATMENT with pseudomonas.jpg') }}" alt="SEED TREATMENT with pseudomonas" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Mixing of Pseudomonas with FYM</span></td>
+                                <td align="center" valign="top"><span class="style11">Seed Treatment with pseudomonas</span></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" valign="middle"><strong><br />
+               ရိုးရာနည်းလမ်းများ</strong>
+                                    <ul class="botanybullet">
+                                        <li>FYM 12.5 တန်/ဧရိယာ သို့မဟုတ် အစိမ်းရင့်မြေဩဇာ 6.25 တန်/ဧရိယာ ကို ပတ်ဝန်းကျင်၌ ရောဂါပိုးများကို တိုက်ခိုက်နိုင်သော အသားကာရိုဏ်းများ တိုးတက်စေရန် အသုံးပြုပါ။<strong> </strong></li>
+                                        <li>အဇီဝမြေဩဇာများကို အလွန်အကျွံ သုံးစွဲခြင်းမှ ရှောင်ကြဉ်ပါ။</li>
+                                        <li>အကောင်းဆုံး အကွာအဝေးနှုန်းကို လက်ခံကျင့်သုံးပါ။</li>
+                                        <li>လက်ခံပေါက်နေသော ဆိုးသော အပင်များကို ဖယ်ရှားပါ။</li>
+                                        <li>ဇီဝသက်သာအာဟာရ ပြုပြင်စီမံမှုများကို အသုံးပြုပါ။</li>
+                                        <li>ရောဂါရှိသော လယ်ကွင်းများမှ ကျန်းမာသော လယ်ကွင်းများသို့ ရေလွှဲပို့ခြင်းကို ရှောင်ကြဉ်ပါ။</li>
+                                        <li>နွေရာသီ၌ မြေအောက်ပိုင်းကို အနက်ရှိုင်းစွာလှဲထိုးခြင်းနှင့် အပွင့်အုပ်များကို မီးရှို့ပါ။</li>
+                                    </ul>
+                                </td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/management/cultural method/apply organic amendments.JPG') }}" alt="apply organic amendments" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/management/cultural method/deep summer ploughing.jpg') }}" alt="deep summer ploughing" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Apply Organic Amendments</span></td>
+                                <td align="center" valign="top"><span class="style11">Deep Summer Ploughing</span></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" align="left" valign="top"><strong><br />
+                ဓာတုဗေဒဆိုင်ရာနည်းလမ်းများ</strong>
+                                    <ul class="botanybullet">
+                                        <li>အရွက်ပိုးတတ်ခြင်းကို အဓိကအားဖြင့် ဖုန်စေးရောဂါကုသပစ္စည်းများကို အသုံးပြု၍ ထိန်းချုပ်ပါ။</li>
+                                        <li>Carbendazim (၁ ဂရမ်/လီတာ) သို့မဟုတ် Propiconazole (၁ မီလီလီတာ/လီတာ) ကို အသုံးပြုနိုင်သည်။</li>
+                                        <li>ရောဂါကူးစက်ထားသော အပင်များကို Benomyl နှင့် Iprodione ကဲ့သို့သော ဖုန်စေးရောဂါကုသပစ္စည်းများနှင့် Validamycin နှင့် Polyoxin ကဲ့သို့သော အဆုတ်ကျောက်များဖြင့် အရေအတွက်ဖြည့်ကာ ရေဆေးခြင်း သုံးပါ။</li>
+                                        <li>Carbendazim 250 ဂရမ် သို့မဟုတ် Chlorothalonil 1 ကီလိုဂရမ် သို့မဟုတ် Edifenphos 1 လီတာ/ဧရိယာကို ရေဆေးပါ။</li>
+                                    </ul>
+                                </td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/management/chemical method/spray Iprodione.jpg') }}" alt="spray Iprodione" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/5. sheath blight/management/chemical method/use polyoxin antibiotic.jpg') }}" alt="use polyoxin antibiotic" width="150" height="150" /></td>
+                            </tr>
+
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Spray Iprodione</span></td>
+                                <td align="center" valign="top"><span class="style11">Use Polyoxin Antibiotic</span></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td colspan="2" align="right" valign="middle">
+                                    <a href="{{ url_for('sheathblight') }}">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <p align="center"><br />
+                        </p>
+            </table>
+            <!-- end .content -->
+        </div>
+    </div>
+    <div class="footer">
+       <p>Copyright © | All Rights Reserved</p>
+       <!-- end .footer -->
+    </div>
+</body>
+
+</html>

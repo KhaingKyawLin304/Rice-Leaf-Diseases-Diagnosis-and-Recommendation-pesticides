@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Home | Rice Leaf Disease Segmentation</title>
+    <link href="{{ url_for('static', filename='style2.css') }}" rel="stylesheet" type="text/css" />
+
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --text-color: #333;
+            --background-color: white;
+            --hover-color: #388E3C;
+        }
+
+        /* Global styles */
+        body {
+            font-family: Georgia, serif; /* Set global font to Georgia */
+            color: var(--text-color);
+            margin: 0;
+            background-color: var(--background-color);
+            padding-top: 70px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: var(--background-color);
+            position: fixed;
+            width: 95%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+
+        .nav {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--hover-color);
+        }
+
+        /* Footer styles */
+        .footer {
+            text-align: center;
+            color: #666;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background-color: #f1f1f1;
+            margin-top: 20px;
+        }
+
+        /* Content styles */
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .content .sidebar {
+            flex: 1;
+            max-width: 250px;
+            margin-right: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .sidebar td {
+            padding: 10px;
+        }
+
+        .sidebar a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .sidebar a:hover {
+            color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        .content .main-content {
+            flex: 3;
+            background-color: #fffff0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: -28px;
+        }
+
+        .main-content h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Minimalist list styles */
+        .minimalist-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-family: Georgia, serif; /* Apply Georgia to list items */
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .minimalist-list li {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 4px solid var(--primary-color);
+            background: #f9f9f9;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .minimalist-list li:hover {
+            background-color: #e8f5e9;
+        }
+
+        /* Image container */
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .small-image {
+            width: 150px;
+            height: auto;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">PaddyWatch</div>
+            <div class="nav">
+                <a href="{{ url_for('index') }}">ပင်မစာမျက်နှာ</a>
+                <a href="{{ url_for('upload_file') }}">စပါးရွက်ရောဂါရှာဖွေရန်</a>
+                <a href="{{ url_for('about') }}">ကျွန်ုပ်တို့အကြောင်း</a>
+                <a href="{{ url_for('contactus') }}">ဆက်သွယ်ရန်</a>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="sidebar">
+                <table width="100%" border="0">
+                    <tr bgcolor="#FFFF99">
+                        <td align="center">
+                            <font size="5"><strong>ရောဂါများ</strong></font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="center">
+                            <a href="{{ url_for('blast') }}">
+                                <font color="#000000"><b>စပါးဂုတ်ကျိုးရောဂါ(Blast)</b></font>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="center">
+                            <a href="{{ url_for('brownspot') }}">
+                                <font color="#000000"><b>အညိုကွက်ရောဂါ(BrownSpot)</b></font>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="center">
+                            <a href="{{ url_for('hispa') }}">
+                                <font color="#000000"><b>စပါးလောင်မီးပိုး(Hispa)</b></font>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="center">
+                            <a href="{{ url_for('sheathblight') }}">
+                                <font color="#000000"><b>စပါးပင်စည်ပုပ်ရောဂါ(Sheath Blight)</b></font>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="center">
+                            <a href="{{ url_for('tungro') }}">
+                                <font color="#000000"><b>တန့်ဂရိုရောဂါ(Tungro)</b></font>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='Disease.png') }}" class="small-image" />
+                </div>
+            </div>
+            <div class="main-content">
+                <h1>စပါးရွက်ရောဂါများကို နားလည်ခြင်း</h1>
+                <ul class="minimalist-list">
+                    <li>Blast Disease (Magnaporthe oryzae): မြန်မာနိုင်ငံတွင် စပါးဂုတ်ကျိုးရောဂါသည် ၁၉၇၀ ပြည့်နှစ်များတွင် အထူးပြင်းထန်ခဲ့ပြီး ရောဂါဖြစ်လွယ်သော နယ်များတွင် စပါးအရင်းနှုန်း ၃၀% ထိ ထိခိုက်ခဲ့သည်။</li>
+                    <li>Brown Spot (Bipolaris oryzae): ၁၉၈၀ ပြည့်နှစ်များတွင် အညိုကွက်ရောဂါသည် အထူးပြင်းထန်ကာ ဧရာဝတီတိုင်းဒေသကြီးရှိ နယ်မြို့များတွင် စပါးအရင်းနှုန်း ၂၀% ထိ ဆုံးရှုံးမှုများ ဖြစ်ခဲ့သည်။</li>
+                    <li>Rice Hispa (Dicladispa armigera): ၁၉၉၀ ပြည့်နှစ်များအတွင်း စပါးလောင်မီးပိုးက စပါးခင်းများတွင် ဆုတ်ယုတ်မှု ၁၅% ထိ ဖြစ်စေခဲ့သည်။</li>
+                    <li>Sheath Blight (Rhizoctonia solani): ၂၀၀၀ ပြည့်နှစ်များတွင် စပါးပင်စည်ပုပ်ရောဂါသည် မိုးရွာသွန်းမှုနှင့် ရေလုံမြေများတွင် ပိုမိုဖြစ်ပွားကာ စပါးခင်းများတွင် ၂၅% ထိ ထိခိုက်မှု ဖြစ်စေခဲ့သည်။</li>
+                    <li>Rice Tungro Disease: ၁၉၉၀ ပြည့်နှစ်များတွင် မြန်မာနိုင်ငံတွင် တန့်ဂရိုရောဂါ အကြီးအကျယ်ဖြစ်ပွားကာ ထိခိုက်မှု ၃၀% ထိ ဖြစ်ပွားခဲ့သည်။</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Copyright © | All Rights Reserved</p>
+    </div>
+</body>
+
+</html>
+

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Result | Rice Leaf Disease Segmentation</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --text-color: #333;
+            --background-color: white;
+            --hover-color: #388E3C;
+            --accent-color: #FFC107;
+            --card-bg-color: #F5F5F5;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --border-color: #ddd; /* Ensure border color is defined */
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--background-color);
+            position: fixed;
+            width: 95%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--hover-color);
+        }
+
+        .container {
+            flex: 1; /* Ensures the container takes up available space */
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: #f1f1f1;
+        }
+
+        .result-container {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            display: flex;
+            margin-top: 82px;
+            justify-content: center;
+        }
+
+        .result-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            align-items: center; /* Centers the content vertically */
+            min-height: 400px; /* Ensure enough height for vertical centering */
+        }
+
+        .left-side {
+            flex: 1;
+            max-width: 55%; /* Adjust the width relative to the container */
+        }
+
+        .result-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .result-intro {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            line-height: 1.6;
+            text-align: justify; /* Adjust text alignment for readability */
+            padding: 10px;
+            border-left: 4px solid var(--primary-color); /* Stylish left border */
+            background-color: #f9f9f9; /* Light background for contrast */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .result-boxes {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .unified-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Increased shadow for depth */
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .unified-box.healthy {
+            margin-bottom: 40px; /* Double space for healthy detection */
+        }
+
+        .unified-box:hover {
+            transform: scale(1.02);
+        }
+
+        .disease-info {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #000; /* Neutral color for main text */
+            display: flex;
+            align-items: center; /* Align items vertically */
+        }
+
+        .disease-label {
+            margin-right: 5px; /* Space between the label and link */
+        }
+
+        .disease-link {
+            color: #1976d2; /* Distinct color for links */
+            text-decoration: none;
+            margin-right: 5px; /* Space between the link and score */
+        }
+
+        .disease-score {
+            font-weight: normal;
+            color: #555;
+        }
+
+        .management-info {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .management-info a {
+            color: #388e3c; /* Green color for links */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .management-info a:hover {
+            color: #2c6e49;
+        }
+
+        .result-image-container {
+            flex: 1;
+            max-width: 40%; /* Adjust the width relative to the container */
+        }
+
+        .result-image {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 15px; /* Softer rounded corners */
+            box-shadow: 0 8px 16px var(--shadow-color); /* Increase shadow for a more prominent effect */
+            object-fit: cover; /* Ensures the image scales correctly without distorting */
+            transition: transform 0.3s ease; /* Smooth transition for scaling */
+        }
+
+        /* Full-screen styles for the image */
+        .fullscreen {
+            position: fixed; /* Fixed positioning to cover the viewport */
+            top: 0;
+            left: 0;
+            width: 100vw; /* 100% of viewport width */
+            height: 100vh; /* 100% of viewport height */
+            object-fit: contain; /* Fit the image within the viewport */
+            z-index: 9999; /* Ensure it's above all other content */
+            cursor: zoom-out; /* Change cursor to indicate zoom-out functionality */
+        }
+
+        /* Styles to disable scrolling when the image is in full-screen */
+        body.no-scroll {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">PaddyWatch</div>
+            <div class="nav">
+                <a href="{{ url_for('index') }}">ပင်မစာမျက်နှာ</a>
+                <a href="{{ url_for('upload_file') }}">စပါးရွက်ရောဂါရှာဖွေရန်</a>
+                <a href="{{ url_for('about') }}">ကျွန်ုပ်တို့အကြောင်း</a>
+                <a href="{{ url_for('contactus') }}">ဆက်သွယ်ရန်</a>
+            </div>
+        </div>
+
+        <div class="result-container">
+            <div class="result-content">
+                <div class="left-side">
+                    <div class="result-title">ရောဂါရှာဖွေခြင်း ရလဒ်</div>
+                    <p class="result-intro">
+                        စပါးပုံကို ခွဲခြမ်းစိတ်ဖြာပြီးနောက် ဖြစ်နိုင်သော ရောဂါအမျိုးအစားနဲ့ ကုသနည်း သတင်းအပြည့်အစုံကို အောက်တွင် ကြည့်ရှုနိုင်ပါသည်။
+                    </p>
+                    <ul class="result-boxes">
+                        {% for detection in detections %}
+                        <li>
+                            <div class="unified-box {% if detection.class == 'ကျန်းမာသော စပါးရွက်' %}healthy{% endif %}">
+                                <div class="disease-info">
+                                    <span class="disease-label">ရောဂါအမျိုးအစား :</span>
+                                    <a href="{{ url_for('disease_page', disease_name=detection.class|lower|replace(' ', '')) }}" class="disease-link">
+                                        {{ detection.class }}
+                                    </a>
+                                    <span class="disease-score"> ({{ (detection.score * 100) | round(2) }}%)</span>
+                                </div>
+
+                                <div class="management-info">
+                                    <p>ရောဂါလက္ခဏာနှင့် ကိုင်တွယ်ရန်နည်းလမ်းများ : 
+                                        <a href="{{ url_for('disease_page', disease_name=detection.class|lower|replace(' ', '')) }}" class="disease-link">ပိုမိုလေ့လာရန်</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="result-image-container">
+                    <img src="{{ url_for('serve_result', filename=result_image) }}" alt="Result Image" class="result-image" id="resultImage">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        &copy; 2024 Rice Leaf Disease Segmentation - All Rights Reserved
+    </div>
+    <script>
+        document.getElementById('resultImage').addEventListener('dblclick', function() {
+            if (this.classList.contains('fullscreen')) {
+                // Reset to original size
+                this.classList.remove('fullscreen');
+                document.body.classList.remove('no-scroll');
+            } else {
+                // Expand to full-screen
+                this.classList.add('fullscreen');
+                document.body.classList.add('no-scroll');
+            }
+        });
+    </script>
+</body>
+</html>
+

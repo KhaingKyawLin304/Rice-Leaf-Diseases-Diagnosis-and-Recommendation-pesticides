@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Brown Spot | Rice Leaf Disease Segmentation</title>
+    <link href="{{ url_for('static', filename='style2.css') }}" rel="stylesheet" type="text/css" />
+
+
+     <style>
+        /* Root variables for color scheme */
+        :root {
+            --primary-color: #4CAF50;
+            --text-color: #333;
+            --background-color: white;
+            --hover-color: #388E3C;
+        }
+
+        /* Global styles */
+        body {
+            font-family: Georgia, serif; /* Apply Georgia font to the entire body */
+            padding-top: 70px; /* Adjust this value based on the header height */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px; /* Increased padding for a bigger header */
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: var(--background-color);
+            position: fixed; /* Fix the header position */
+            width: 95%; /* Make sure header spans the full width */
+            top: 0; /* Stick to the top of the page */
+            left: 0; /* Align to the left edge */
+            z-index: 1000; /* Ensure the header stays on top of other content */
+        }
+
+        /* Logo styles */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        /* Navigation styles */
+        .nav {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--hover-color);
+        }
+
+	.1rounded-menu a {
+	    	
+		color: var(--text-color);
+		text-decoration: none;
+		font-weight: bold;
+	    }
+
+        /* Footer styles */
+        .footer {
+            text-align: center;
+            color: #666;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background-color: #f1f1f1;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+    <div class="header">
+        <div class="logo">PaddyWatch</div>
+        <div class="nav">
+            <a href="{{ url_for('index') }}">ပင်မစာမျက်နှာ</a>
+            <a href="{{ url_for('upload_file') }}">စပါးရွက်ရောဂါရှာဖွေရန်</a>
+            <a href="{{ url_for('about') }}">ကျွန်ုပ်တို့အကြောင်း</a>
+            <a href="{{ url_for('contactus') }}">ဆက်သွယ်ရန်</a>
+        </div>
+    </div>
+        <div class="content">
+            <table width="1100" height="824" border="0" class="botanyfont">
+                <tr>
+                    <td width="191" height="" valign="top" class=" botany1">
+                        <table width="191" border="0" align="center">
+                            <tr class="menubg">
+                                <td class="rounded-menu" width="181"  height="56" align="center" valign="middle"><b><strong> <a href="#symptom">ရောဂါလက္ခဏာများ</a></strong></td>
+                            </tr>
+                            <tr class="menubg">
+                                <td class="rounded-menu" height="58" align="center" valign="middle"><strong><a href="#Identification">ရောဂါပိုးမွှား ခွဲခြားသတ်မှတ်ခြင်း</a></strong></td>
+                            </tr>
+                            <tr class="menubg">
+                                <td class="rounded-menu" height="58" align="center" valign="middle"><strong><a href="#Mgmt">&nbsp;&nbsp;&nbsp;စီမံခန့်ခွဲမှုနည်းလမ်းများ</a></strong></td>
+                            </tr>
+                        </table> <br /></td>
+                    <td width="803" colspan="2" valign="top" bgcolor="#fffff0" class="croppro">
+                        <h1 align="center" size="2"><strong>အညိုကွက်ရောဂါ(BrownSpot)<br />
+          (</strong><em>Helminthosporium oryzae</em><strong>) </strong></h1>
+                        <br />
+                        <br />
+                        <table width="750" border="0">
+                            <tr>
+                                <td width="436" bgcolor="#92B223"><b><font color="#ffff1f" size="4"><a name="symptom" id="symptom"></a>ရောဂါလက္ခဏာများ</font></b></td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">
+                                    <ul class="botanybullet">
+					<li>အညိုစက်ကို အစေ့ပုံစက် သို့မဟုတ် Helminthosporiose သို့မဟုတ် မှိုရောဂါ ဟု ခေါ်ကြသည်။</li>
+					<li>ဤမှိုသည် စိုက်ခင်းတွင် စေ့များမှ စတင်၍ ပင်စိမ်အဆင့် အထိ ကျက်စိမ်းရာမှ တိုက်ခိုက်သည်။</li>
+					<li>အဆိုပါရောဂါသည် အစမှာ သေးငယ်သော အညိုရောင်အမှတ်အသားများ အဖြစ်ပေါ်လာပြီး နောက်ပိုင်းတွင် လေးမောင်း သို့မဟုတ် စက်ပုံစက်ပုံဖြစ်သည်။ (စစိမ်းနှံအရွက်ကိုတူသည်)</li>
+					<li>အစက်များသည် အကျယ် 0.5 မှ 2.0 မီလီမီတာရှိပြီး အစက်အချင်းများတွဲ၍ ကြီးမားသော အမှတ်အသားဖြစ်သည်။</li>
+					<li>ထို့နောက် အစက်များအချင်းတကာကွယ်ရာမှ အရွက်သည် ခြောက်သွေ့သွားသည်။</li>
+					<li>ပြစ်မှားမှုသည် ခေါင်းနှင့် နောက်မြီးတံတွင်လည်းအညိုရောင်ဖြစ်ပေါ်စေသည်။</li>
+					<li>အစေ့များလည်း ရောဂါခံရသည်။ (ကျောက်သံရောင်ဖြစ်သောကြောင့် အစေ့များတွင် အစက်အပြောက်ပေါ်လာပြီး ငြမ်းရောင်ကျောက်စိမ်းအလွှာဖြင့် ဖုံးအုပ်ထားသည်။)</li>
+					<li>အပင်ငယ်များ မေသဆုံးပြီး ရောဂါခံရသော စိုက်ခင်းများကို ဝေးကွာသောနေရာမှ ခြောက်သွေ့သောအမိုက်အမျှင်သွေးကြောင့် သတိပြုနိုင်သည်။</li>
+					<li>အညိုရောင် သို့မဟုတ် အနက်ရောင် အစက်များသည် စပျစ်များပေါ်တွင်လည်း ပါဝင်သည်။</li>
+					<li>အစေ့များတွင် ရောဂါဖြစ်ပေါ်ခြင်းက အစေ့ပြုတ်သွားခြင်း၊ အပင်ငယ်များမေသဆုံးခြင်းနှင့် စပါးပွင့်အရည်အသွေးနှင့် အလေးချိန် လျော့နည်းစေသည်။</li>
+					<li>ပြင်းထန်သောအခြေအနေများတွင် ထွက်ရှိမှု ၅၀% လျော့နည်းစေသည်။</li>
+                                    </ul>
+                                </td>
+                                <td width="150" height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/symptoms/1-Circular or oval Spots on leaves.JPG') }}" width="150" height="150" /></td>
+                                <td width="150" height="150" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/symptoms/2-Spots on leaves with  brown margin.JPG') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top">Circular or Oval Spots on Leaves</td>
+                                <td align="center" valign="top">Spots on leaves with brown margin</td>
+                            </tr>
+                            <tr>
+                                <td height="150" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/symptoms/3-Dark brown or black spots on panicle  glumes and grains.JPG') }}" width="150" height="150" /></td>
+                                <td height="150" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/symptoms/4-brown spot on grains.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top">Dark Brown or Black Spots on Panicle Glumes and Grains</td>
+                                <td align="center" valign="top">Brown Spot on Grains</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <p><strong><br />
+                ကူးစက်နှင့် ဘေးကင်းလုံခြုံမှု၏ အခြေအနေ</strong></p>
+                                    <ul class="botanybullet">
+                                        <li>ရောဂါခံစားထားသော စေ့များသည် ရောဂါပျံ့နှံ့မှု၏ အဓိကအရင်းအမြစ်ဖြစ်သည်။.</li>
+                                        <li>အဆိုပါမှိုသည် အတူတကွရှိသော ဂုဏ်သိက္ခာထားရှိသော ပင်များပေါ်တွင်လည်း ရှင်သန်နေရသည်။ မှိုသည် စေ့များအတွင်းတွင် ၄ နှစ်ထက်ပို၍ သက်ရှင်နိုင်သည်။ ရောဂါခံစားထားသော စေ့များ၊ မလိုအပ်သော စပါးပင်များ၊ ရောဂါခံစားထားသော စပါးအငွေ့၊ နှင့် သစ်ပင်အချို့သည် လယ်ထဲတွင် ရောဂါပျံ့နှံ့မှု၏ အဓိကအရင်းအမြစ်များဖြစ်သည်။ ရောဂါခံထားသော စေ့များသည် ရောဂါခံစားရသော အပင်ငယ်များ ဖြစ်ပေါ်စေသည်။ မှိုသည် အပင်မှ အပင်ဆီသို့နှင့် လယ်ပြင်ထဲတွင် လေတံဖောက်သော အမှုန်များအားဖြင့် ကူးစက်ပျံ့နှံ့နိုင်သည်။</li>
+                                        <li>ရောဂါသည် အာဟာရပျက်စီးသော မြေများနှင့် ရေနှစ်ခြင်းမပြုသော မြေများတွင် ရှိနေရသောကာ စိုစွတ်သဘာဝအပေါ်တွင် စပါးစိုက်ထားသော စပါးပင်များတွင် ရှားရှားပါးပါးပင်ရှိသည်။</li>
+                                        <li>အဆင့်မပြည့်စုံသော အာဟာရပျက်စီးသော မြေများ သို့မဟုတ် အဆင့်နိမ့်သော အခြေအနေရှိသော မြေများတွင် ရောဂါတိုးတက်မှုကို အထောက်အပံ့ပေးသည်။</li>
+                                    </ul>
+				
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">
+                                    <a href="{{ url_for('brownspot') }}">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <br />
+                        <table width="750" border="0" align="center">
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td width="436" bgcolor="#92B223"><b><font color="#ffff1f" size="4"><strong><a name="Identification" id="Identification"></a>ရောဂါပိုးမွှား ခွဲခြားသတ်မှတ်ခြင်း</strong></font></b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td align="center" valign="middle"></td>
+                            </tr>
+                            <tr>
+                                <td width="150" height="150" align="center" valign="top"><a href="cultivationpractices3.html"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/identification of pathogen/conidia.jpg') }}" width="150" height="150" /></a></td>
+                                <td width="150" height="150" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/identification of pathogen/fungal pathogen.jpg') }}" width="150" height="150" /></td>
+                                <td rowspan="4" align="left" valign="top"><strong>Brown Spot:</strong> <em>Helminthosporium oryzae—FUNGAL DISEASE</em>
+                                    <br />
+                                    <p>(Syn: <em>Drechslera oryzae</em>) (Sexual stage : <em>Cochliobolus  miyabeanus</em>)</p>
+                                    <p><br /> အဆိုပါရောဂါကိုဖြစ်စေသော မှိုသည် နှစ်ရပ်သောအခြေအနေများတွင် ရှိနေသည်။ အဆိုပါအခြေအနေများမှာ လိင်မပါသောအဆင့် (anamorph သို့မဟုတ် အမှားအဆင့်) နှင့် လိင်ပါသောအဆင့် (teleomorph သို့မဟုတ် အမှန်အဆင့်) ဖြစ်သည်။<br
+                                        />
+                                        <br /> အဆိုပါမှို၏ ကိုယ်ထည်ဖွဲ့စည်းမှုများတွင် အနက်ရောင် ငြမ်းထန်သော mycelial အခင်းများပါဝင်ပြီး prostrate hyphae နှင့် erect sporophores ဖြင့် ပြုလုပ်ထားသည်။ Hyphae များသည် များပြားပြီး ခက်ခဲလှုပ်ရှားကြွရုပ်သွားသည်။ ၎င်းတို့သည် အနက်ရောင် သို့မဟုတ် olivaceous ဖြစ်ပြီး အချင်း ၈-၁၅ µm သို့မဟုတ် ပို၍ ကြီးမားသည်။ Sporophores များသည် hyphae များမှ တန်းတောက်သော အမြစ်များအဖြစ် ဖြစ်လာသည်။ Conidia များသည် ၃၅-၁၇၀ x ၁၁-၁၇ µm ရှိသည်။ ယေဘူယျအားဖြင့် conidia များသည် အနည်းငယ်ကွေးဝိုင်းပြီး အလယ်ပိုင်းတွင် အကျယ်ဆုံးဖြစ်ကာ hemispherical အနောက်ဆုံးဆုံးထိ ဖြတ်သိမ်းနေသည်။ ပျက်စီးသော conidia များသည် အညိုရောင်ဖြစ်ပြီး ပတ်ပတ်လည်နံရံမှာ ပုံမှန်နှစ်ခြားခြားသော အထူရှိသည်။<br />
+                                        <strong><br />
+                ရောဂါသင့်လျော်သော အခြေအနေများ:</strong></p>
+                                    <ul class="botanybullet">
+                                        <li>အပူချိန် ၂၅-၃၀°C</li>
+                                        <li>အနည်းဆုံး ၈၀ ရာခိုင်နှုန်းထက်မကသော ဆွေမျိုးစိုထိုင်းမှု </li>
+                                        <li>အာဟာရဓာတ်အလွန်များနေခြင်းက ရောဂါဖြစ်ပေါ်မှုကို ပိုမိုဆိုးရွားစေသည်။</li>
+                                        <li>ရောဂါဖြစ်ပေါ်စေရန် အရွက်များသည် ၈-၂၄ နာရီအထိ စိုစွတ်နေရမည်။ </li>
+                                    </ul>
+
+                                    <p><br />
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Conidia</span></td>
+                                <td align="center" valign="top"><span class="style11">Fungal Pathogen</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/identification of pathogen/fuugus.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center" valign="top" class="labelline">Fungus</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">
+                                    <a href="{{ url_for('brownspot') }}">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table width="757" border="0" align="center">
+                            <tr>
+                                <td width="443" bgcolor="#92b223"><b><font color="#ffff1f" size="4"><a name="Mgmt" id="Mgmt"></a>စီမံခန့်ခွဲမှုနည်းလမ်းများ</font></b></td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="2" align="center" valign="middle"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" valign="top"><strong>ရိုးရာနည်းလမ်းများ</strong>
+                                    <ul class="botanybullet">
+                                        <li>ရောဂါသည် စေ့များမှဖြစ်ပေါ်သောကြောင့် ရောဂါမပါဝင်သော စေ့များကို အသုံးပြုပါ။</li>
+                                        <li>အစားထိုးပင်များနှင့် collateral hosts များကို ဖယ်ရှားပါ။</li>
+                                        <li>စိတ်အားပျော်စေသော အသုံးပြုနိုင်သော စပါးမျိုးစေ့များကို အသုံးပြုခြင်းသည် ရောဂါထိန်းချုပ်မှုအတွက် အဓိက စျေးပေါသောနည်းလမ်းဖြစ်သည်။</li>
+                                        <li>ADT 44, PY 4, CORH 1, CO 44, CAUVERY, BHAVANI, TPS 4 နှင့် Dhanu အစွမ်းထက်မျိုးစေ့များကို စိုက်ပျိုးပါ။</li>
+                                        <li>စပါးပင်များ၏ အကောင်းဆုံးတိုးတက်မှုအတွက် အာဟာရဓာတ်မှန်ကန်မှု ပေးပို့ခြင်းနှင့် ရေစိုးရိမ်မှုအား ကာကွယ်ရန် ကောင်းမွန်သော အခြေအနေများပေးခြင်းသည် အညိုစက်ရောဂါကို ထိန်းချုပ်ရန် အရေးကြီးဆုံးအချက်များဖြစ်သည်။</li>
+                                        <li>ရောဂါကို သာမန်အားဖြင့် စပါးမြေစပ်ဖြစ်သော မြေများတွင် ရှားရှားပါးပါးပင် တွေ့ရသည်။</li>
+                                        <li>စပါးပင်များအတွက် ရှားပါးသော ဆီလီကွန်ရှိသော မြေများကို စိုက်ပျိုးမည့် အချိန်တွင် ကယ်လ်ဆီယမ်ဆီလီကိတ် slag ဖြင့် ပြုပြင်ရမည်၊ လယ်မြေကို ကောင်းမွန်စွာ ရေနွှုပ်ပြီး ရေစိုးရိမ်မှုအား ကာကွယ်ရမည်။</li>
+                                    </ul>
+                                    <br /></td>
+                                <td width="150" height="150" align="center" valign="middle"><a href="cultivationpractices3.html"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/management/Cultural Method/apply calcium silicate slag.jpg') }}" width="150" height="150" /></a></td>
+                                <td width="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/management/Cultural Method/use disease free seeds.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td height="17" align="center" valign="middle"><span class="style11">Apply Calcium Silicate Slag</span></td>
+                                <td align="center" valign="middle"><span class="style11">Use Disease Free Seeds</span></td>
+                            </tr>
+                            <tr>
+                                <td width="150" height="152" align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/management/Cultural Method/use resistant variety- ADT 44.jpg') }}" width="150" height="150" /><br />
+                                    <span class="labelline">Use Resistant Variety<br />
+ADT 44</span></td>
+                                <td align="center" valign="top"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/management/Cultural Method/use resistant variety- TPS 4.jpg') }}" width="150" height="150" /><br />
+                                    <span class="labelline">Use Resistant Variety<br />
+TPS 4</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" valign="top">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" valign="top"><strong><br />
+                ကြိုတင်ကာကွယ်နည်းများ</strong>
+                                    <ul class="botanybullet">
+                                        <li>စေ့များကို Pseudomonas fluorescens ၁၀ ဂရမ်/ကီလိုဂရမ် အတိုင်း ထိန်းသိမ်းပြီး စေ့ပြုတ်ပျက်ကာကွယ်ရန် ၂.၅ ကီလိုဂရမ် သို့မဟုတ် ထုတ်ကုန်များ/ဟက်တာ (ha) ကို ၁၀၀ လီတာ ရေထဲတွင် ပျော်ဝင်ကာ ၃၀ မိနစ်ခန့် မျိုးစေ့များကို စိုစွတ်စေပါ။</li>
+                                        <li>Captan သို့မဟုတ် Thiram ဖြင့် ၂.၀ ဂရမ်/ကီလိုဂရမ် အတိုင်း စေ့များကို စိုစွတ်ထိန်းသိမ်းပါ။</li>
+                                        <li>Agrosan သို့မဟုတ် Ceresan ၂.၅ ဂရမ်/ကီလိုဂရမ် အတိုင်း စေ့များကို စိုစွတ်ထိန်းသိမ်းခြင်းက စေ့များပျက်စီးမှုကို ကာကွယ်ပေးပါသည်။ </li>
+                                        <li>မှိုသည် စေ့များမှ ကူးစက်ပျံ့နှံ့သည့်အတွက် စိုက်ပျိုးရန်မတိုင်မီ ၅၃-၅၄°C အပူချိန်တွင် ၁၀-၁၂ မိနစ်ခန့် အပူရေဖြင့် စေ့များကို ပြုလုပ်ပေးနိုင်ပါသည်။ ဤပြုပြင်မှုသည် အပင်ငယ်များ၏ ရှေ့ဆွဲရောဂါကို ထိန်းချုပ်ပေးသည်။ စိုက်ပျိုးရန်မတိုင်မီ ၈ နာရီအထိ အေးမြသောရေထဲတွင် စေ့များကို စိုစွတ်စေခြင်းက ကုသမှု၏ ထိရောက်မှုကို ပိုမိုမြင့်တက်စေသည်။</li>
+                                    </ul>
+                                </td>
+                                <td height="66" align="center" valign="middle">&nbsp;</td>
+                                <td align="center" valign="middle">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="24" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/management/Preventive Method/fungicide for seed treatment- agrosan.jpg') }}" width="150" height="150" /></td>
+                                <td align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/management/Preventive Method/pseudomonas seed treatment.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="middle"><span class="style11">Fungicide for Seed Treatment- Agrosan</span></td>
+                                <td align="center" valign="middle"><span class="style11">pseudomonas Seed Treatment</span></td>
+                            </tr>
+                            <tr>
+                                <td height="71" colspan="2" align="center" valign="top">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="4" colspan="3" valign="top">
+                                    <hr size="1" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td rowspan="5" align="left" valign="top"><strong><br />
+                ဓာတုဗေဒဆိုင်ရာနည်းလမ်းများ</strong>
+                                    <ul class="botanybullet">
+                                        <li>Captan သို့မဟုတ် Thiram ဖြင့် ၂.၀ ဂရမ်/ကီလိုဂရမ် အတိုင်း စေ့များကို စိုစွတ်ထိန်းသိမ်းပါ။</li>
+                                        <li>Mancozeb (၂.၀ ဂရမ်/လီတာ) သို့မဟုတ် Edifenphos (၁ ml/လီတာ) ကို ၁၀ - ၁၅ ရက်ကြား ၂ မှ ၃ ကြိမ်ဖြန်းပါ။ </li>
+                                        <li>ပန်းပွင့်သည့်အချိန်နှင့် ပန်းပွင့်ပြီးသည့် အဆင့်များတွင် မနက်စောစောနှင့် နေ့ခင်းပိုင်းများတွင် ဖြန်းသင့်သည်။</li>
+                                        <li>Agrosan သို့မဟုတ် Ceresan ၂.၅ ဂရမ်/ကီလိုဂရမ် အတိုင်း စေ့များကို စိုစွတ်ထိန်းသိမ်းခြင်းက စေ့ပြုတ်ပျက်ကာကွယ်စေသည်။ နှစ်ကြိမ်ဖြန်းထားသော ချေးပွန်းသည့် မှိုကာကွယ်ဆေးများကို ဖြန်းခြင်းဖြင့် အမှတ်အသားကူးစက်မှုကို ထိန်းချုပ်နိုင်သည်။</li>
+                                        <li>Grisepfulvin, nystatin, aureofungin နှင့် အခြား အဓိကအာနိသင်ရှိသော ဓာတုဆေးများသည် စေ့ပြုတ်ရောဂါကာကွယ်ခြင်းတွင် ထိရောက်မှုရှိသည်။</li>
+                                        <li>Captan, Thiram, Chitosan, Carbendazim သို့မဟုတ် Mancozeb ဖြင့် စေ့များကို စိုစွတ်ထိန်းသိမ်းခြင်းက စေ့ပြုတ်ရောဂါကို လျော့ကျစေသည်။ Tricyclazole ဖြင့် စေ့များကို စိုစွတ်ထိန်းသိမ်းပြီး ထို့နောက် တောင်ပေါ်စပ်အဆင့်နှင့် အကြောသိမ်းအဆင့်များတွင် Mancozeb + Tricyclazole ဖြန့်ဖြူးခြင်းက ရောဂါကို ကောင်းစွာထိန်းချုပ်ပေးသည်။ လယ်ပြင်တွင် Edifenphos, Chitosan, Iprodione သို့မဟုတ် Carbendazim အသုံးပြုခြင်းသည်လည်း သင့်တော်ပါသည်။</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/management/Chemical Method/spray Mancozeb.jpg') }}" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/management/Chemical Method/spraying of fungicide.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+
+                            <tr class="labelline">
+                                <td height="10" align="center" valign="top"><span class="style11">Spray Mancozeb</span></td>
+                                <td height="10" align="center" valign="top"><span class="style11">Spraying of Fungicide</span></td>
+                            </tr>
+                            <tr>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/management/Chemical Method/treat the seeds with Thiram.jpg') }}" width="150" height="150" /></td>
+                                <td height="150" align="center" valign="middle"><img src="{{ url_for('static', filename='Images/Images/diseases/2. brown spot/management/Chemical Method/use antibiotic- aureofungin.jpg') }}" width="150" height="150" /></td>
+                            </tr>
+                            <tr class="labelline">
+                                <td align="center" valign="top"><span class="style11">Treat the Seeds with Thiram</span></td>
+                                <td align="center" valign="top"><span class="style11">Use Antibiotic- Aureofungin</span></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td colspan="2" align="right" valign="middle">
+                                    <a href="{{ url_for('brownspot') }}">
+                                        <font color="#CC0000">Top</font>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+            </table>
+          <!-- end .content -->
+        </div>
+        <!-- end .container -->
+    </div>
+    <div class="footer">
+       <p>Copyright © | All Rights Reserved</p>
+       <!-- end .footer -->
+    </div>
+</body>
+
+</html>

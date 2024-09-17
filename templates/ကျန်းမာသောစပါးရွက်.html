@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy | Rice Leaf Disease Segmentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #4CAF50;
+            --text-color: #333;
+            --background-color: white;
+            --hover-color: #388E3C;
+            --font-body: 'Google Sans', sans-serif;
+            --font-heading: 'Georgia', serif;
+        }
+
+        /* Global styles */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: var(--font-body);
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: var(--background-color);
+            position: fixed;
+            width: 95%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            font-family: var(--font-heading);
+        }
+
+        /* Adjust the body content to account for the fixed header */
+        body {
+            padding-top: 70px;
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+
+        /* Logo styles */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        /* Navigation styles */
+        .nav {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--hover-color);
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background-color: #f1f1f1;
+            margin-top: 20px;
+        }
+
+        /* Content Styles */
+        .content h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.rem;
+            font-weight: 700;
+            margin-top:-5px;
+            font-family: var(--font-heading);
+        }
+
+        .content p {
+            font-size: 1.15rem;
+            margin-top: -12px;
+            text-align: justify;
+            font-family: var(--font-body);
+            line-height: 1.5;
+        }
+
+        /* Visual Characteristics and Image Side-by-Side */
+        .content .side-by-side {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            margin: 20px 0;
+        }
+
+        .visual-characteristics {
+            flex: 1;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            max-width: 450px;
+        }
+
+        .image-container img {
+            border-radius: 15px;
+            width: 100%;
+            height: auto;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Bullet Point Styles */
+        .botanybullet {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .botanybullet li {
+            margin-bottom: 7px;
+            font-weight: bold;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .botanybullet li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-size: 1.7rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Ensure the list and images stack on smaller screens */
+        @media (max-width: 768px) {
+            .content .side-by-side {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .visual-characteristics,
+            .image-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">PaddyWatch</div>
+            <div class="nav">
+                <a href="{{ url_for('index') }}">ပင်မစာမျက်နှာ</a>
+                <a href="{{ url_for('upload_file') }}">စပါးရွက်ရောဂါရှာဖွေရန်</a>
+                <a href="{{ url_for('about') }}">ကျွန်ုပ်တို့အကြောင်း</a>
+                <a href="{{ url_for('contactus') }}">ဆက်သွယ်ရန်</a>
+            </div>
+        </div>
+        <div class="content">
+            <h1>ကျန်းမာသော စပါးရွက်များ</h1>
+            <p>
+                ကျန်းမာသော စပါးရွက်များသည် မျိုးကောင်းသော ကောက်ပေးသီးနှံ အတွက် အကောင်းဆုံးဖြစ်သည်။ ၎င်းတို့၏ တောက်ပသော အစိမ်းရောင်အပင်သည် ညီညာချောမွတ်တဲ့ မျက်နှာပြင်ရှိပြီး ရောဂါ၊ သတ္တုအပိုင်းဓာတ်လျော့နည်းမှု သို့မဟုတ် မတော်တဆသော ပတ်ဝန်းကျင်ဆိုင်ရာ အခြေအနေများကဲ့သို့သော အထူးသန့်ရှင်းသော အခြေအနေများမှ လွတ်မြောက်နေသည်ကို ပြသသည်။
+            </p>
+            <div class="side-by-side">
+                <div class="visual-characteristics">
+                    <h2>မြင်ရသော အထူးလက္ခဏာများ</h2>
+                    <ul class="botanybullet">
+                        <li>တောက်ပသော အစိမ်းရောင် : ကျန်းမာမှုအခြေအနေကို ဖော်ပြသည်။</li>
+                        <li>အပေါ်မျက်နှာ ပျောက်ကင်း : ရောဂါ သို့မဟုတ် ဖျက်စီးမှုအထက်အတတ်များ မရှိပါ။</li>
+                        <li>အရွက်မျက်နှာပြင် : ညီညာချောမွတ်တဲ့ မျက်နှာပြင်ရှိပြီး သေချာကြီးထွားပုံပေါ်တယ်။</li>
+                        <li>အနေအထား : အရင်းအဖျားအညီအမျှ ရင့်သန်‌နေကြပြီး ကောင်းစွာရှင်သန်နေတယ်။</li>
+                    </ul>
+                </div>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='healthy92.jpg') }}" alt="Healthy Rice Leaves">
+                </div>
+            </div>
+            <p>
+                ကျန်းမာသော စပါးရွက်များသည် အပင်၏ စုစုပေါင်း အခြေအနေကို အထောက်အထားပြပါသည်။ ဤအရွက်များသည် စပါးပိုးရောဂါများ ရင်ဆိုင်မှုမရှိဘဲ အရည်အသွေးမြင့်မားသော စပါးပင်များဖြစ်ပါသည်။ ၎င်းတို့၏ ကောင်းမွန်သော အနေအထားသည် အောင်မြင်သော စိုက်ပျိုးမှု၏ အထင်ကရလက္ခဏာတစ်ခုဖြစ်သည်။
+            </p>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Copyright © | All Rights Reserved</p>
+    </div>
+</body>
+</html>
+
