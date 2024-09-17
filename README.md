@@ -1,0 +1,1 @@
+# Rice-Leaf-Diseases-Diagnosis-and-Recommendation-pesticides
